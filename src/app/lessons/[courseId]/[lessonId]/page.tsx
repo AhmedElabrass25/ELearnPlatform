@@ -54,7 +54,11 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
             {/* Video Player */}
             <div className="mb-8">
-                <VideoPlayer url={lesson.videoUrl || `https://www.youtube.com/watch?v=${lesson.youtubeId}`} />
+                <VideoPlayer
+                    url={lesson.videoUrl || `https://www.youtube.com/watch?v=${lesson.youtubeId}`}
+                    thumbnail={lesson.thumbnail}
+                    title={lesson.title}
+                />
             </div>
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">

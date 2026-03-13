@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -63,10 +64,11 @@ export default function Home() {
             <div className="relative mx-auto w-full max-w-md lg:max-w-full flex items-center justify-center mt-8 lg:mt-0">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl" />
               <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px] rounded-full sm:rounded-[40px] overflow-hidden border-8 border-background/50 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                <img
+                <Image
                   src={mockData.instructor.avatar}
                   alt={mockData.instructor.name}
-                  className="object-cover w-full h-full"
+                  fill
+                  className="object-cover"
                   loading="eager"
                 />
               </div>
@@ -212,7 +214,7 @@ export default function Home() {
                 <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-bl-full -z-10" />
                 <CardContent className="p-8">
                   <Quote className="w-10 h-10 text-primary/40 mb-4" />
-                  <p className="text-lg mb-6 leading-relaxed relative z-10">"{testimonial.content}"</p>
+                  <p className="text-lg mb-6 leading-relaxed relative z-10">&quot;{testimonial.content}&quot;</p>
                   <div className="flex items-center justify-between mt-auto">
                     <div className="flex flex-col">
                       <span className="font-bold">{testimonial.name}</span>

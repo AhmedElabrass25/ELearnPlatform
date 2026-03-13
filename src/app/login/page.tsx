@@ -60,7 +60,7 @@ export default function LoginPage() {
                 <div className="relative z-10 mt-auto pt-12">
                     <div className="p-6 bg-card rounded-2xl shadow-sm border border-border/50 max-w-sm">
                         <p className="italic text-muted-foreground leading-relaxed">
-                            "لقد أحببت طريقة عرض الدروس والواجبات المرتبة، ساعدني ذلك كثيراً في تنظيم وقتي."
+                            &quot;لقد أحببت طريقة عرض الدروس والواجبات المرتبة، ساعدني ذلك كثيراً في تنظيم وقتي.&quot;
                         </p>
                         <div className="mt-4 font-bold text-sm">- أحد طلابنا المتميزين</div>
                     </div>
