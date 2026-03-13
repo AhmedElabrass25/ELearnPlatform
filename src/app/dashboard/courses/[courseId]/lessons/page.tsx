@@ -27,7 +27,7 @@ export default function CourseBuilderPage() {
     const handleEdit = (l: Lesson) => { setEditingLesson(l); setFormData({ title: l.title, description: l.description || "", duration: l.duration, youtubeId: l.youtubeId || "", isFree: l.isFree || false }); setIsModalOpen(true); };
     const handleSubmit = () => {
         const data = { ...formData, videoUrl: `https://www.youtube.com/embed/${formData.youtubeId}`, thumbnail: `https://img.youtube.com/vi/${formData.youtubeId}/maxresdefault.jpg` };
-        if (editingLesson) setLessons(lessons.map(l => l.id === editingLesson.id ? { ...l, ...data } : l));
+        if (editingLesson) setLessons(lessons.map((l: Lesson) => l.id === editingLesson.id ? { ...l, ...data } : l));
         else setLessons([...lessons, { id: `lesson${Date.now()}`, ...data, order: lessons.length + 1 } as Lesson]);
         setIsModalOpen(false);
     };
@@ -37,7 +37,7 @@ export default function CourseBuilderPage() {
         const newLessons = [...lessons];
         const target = dir === 'up' ? index - 1 : index + 1;
         [newLessons[index], newLessons[target]] = [newLessons[target], newLessons[index]];
-        setLessons(newLessons.map((l, i) => ({ ...l, order: i + 1 })));
+        setLessons(newLessons.map((l: Lesson, i: number) => ({ ...l, order: i + 1 })));
     };
 
     return (
@@ -50,12 +50,12 @@ export default function CourseBuilderPage() {
                 <Button onClick={handleAdd} className="rounded-xl flex items-center gap-2 w-full sm:w-auto"><Plus size={16} /><span>إضافة درس جديد</span></Button>
             </div>
             <div className="bg-card rounded-2xl border border-border shadow-sm p-4 sm:p-6 space-y-4">
-                {lessons.length > 0 ? lessons.sort((a: any, b: any) => a.order - b.order).map((l: any, i: number) => (
+                {lessons.length > 0 ? lessons.sort((a: Lesson, b: Lesson) => a.order - b.order).map((l: Lesson, i: number) => (
                     <CourseBuilderItem key={l.id} lesson={l} index={i} totalLessons={lessons.length} onMove={moveLesson} onEdit={handleEdit} onDelete={(lesson) => { setLessonToDelete(lesson); setIsDeleteModalOpen(true); }} />
                 )) : <div className="text-center py-12 text-muted-foreground"><PlayCircle size={48} className="mx-auto mb-4 opacity-20" /><p className="text-lg font-medium">لا توجد دروس بعد</p></div>}
             </div>
             <CourseBuilderModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} editingLesson={editingLesson} formData={formData} setFormData={setFormData} onSubmit={handleSubmit} />
-            <CourseBuilderDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} lessonTitle={lessonToDelete?.title || ""} onConfirm={() => { if (lessonToDelete) setLessons(lessons.filter(l => l.id !== lessonToDelete.id)); setIsDeleteModalOpen(false); }} />
+            <CourseBuilderDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} lessonTitle={lessonToDelete?.title || ""} onConfirm={() => { if (lessonToDelete) setLessons(lessons.filter((l: Lesson) => l.id !== lessonToDelete.id)); setIsDeleteModalOpen(false); }} />
         </div>
     );
 }

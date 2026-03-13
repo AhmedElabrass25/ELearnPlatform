@@ -15,7 +15,7 @@ export default function MyCoursesPage() {
     // Read enrolledCourses array & Match course IDs with mockData.courses
     const enrolledCourses = user.enrolledCourses.map((courseId) => {
         return mockData.courses.find((c) => c.id === courseId);
-    }).filter(Boolean); // Filter out any undefined courses
+    }).filter((c): c is any => !!c); // Filter out any undefined courses
 
     return (
         <div className="container py-10 pt-24 min-h-screen">

@@ -26,3 +26,50 @@ export interface Course {
     isPopular?: boolean;
     startDate?: string;
 }
+
+export interface Path {
+    id: string;
+    title: string;
+    slug: string;
+    description: string;
+    coursesCount?: number;
+    lessonsCount: number;
+    examsCount?: number;
+    duration: string;
+    image?: string;
+}
+
+export interface Testimonial {
+    id: string;
+    name: string;
+    role: string;
+    content: string;
+    rating: number;
+}
+
+export interface FAQ {
+    id: string;
+    question: string;
+    answer: string;
+}
+
+export interface User {
+    id: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    educationalLevel: string;
+    governorate: string;
+    enrolledCourses?: string[];
+    birthDate?: string;
+    gender?: string;
+}
+
+export interface Instructor {
+    id: string;
+    name: string;
+    title: string;
+    bio: string;
+    avatar: string;
+    achievements?: string[];
+}
