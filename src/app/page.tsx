@@ -32,7 +32,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <Button size="lg" className="h-12 px-8 text-base font-bold shadow-lg shadow-primary/20" asChild>
-                  <Link href="/courses">تصفح الدورات </Link>
+                  <Link href="/courses">تصفح الدورات</Link>
                 </Button>
                 <Button size="lg" variant="outline" className="h-12 px-8 text-base font-bold bg-background/50 backdrop-blur-sm" asChild>
                   <Link href="/about">عن الأستاذ محمد</Link>
