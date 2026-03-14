@@ -1,4 +1,17 @@
-export const mockData = {
+import { Course, Lesson, Path, Instructor, User, Settings, Testimonial, FAQ } from "@/types";
+
+export const mockData: {
+  site: { name: string; logo: string; tagline: string; description: string };
+  instructor: Instructor;
+  categories: { levels: string[]; types: string[]; topics: string[] };
+  paths: Path[];
+  courses: Course[];
+  lessons: Record<string, Lesson[]>;
+  users: User[];
+  settings: Settings;
+  testimonials: Testimonial[];
+  faqs: FAQ[];
+} = {
   "site": {
     "name": "أكاديمية محمد للغة العربية",
     "logo": "/logo.svg",

@@ -16,6 +16,7 @@ export interface Lesson {
     duration: string;
     youtubeId: string;
     thumbnail: string;
+    videoUrl?: string;
     order: number;
     isFree: boolean;
 }
@@ -93,14 +94,21 @@ export interface FAQ {
     answer: string;
 }
 
+export interface Settings {
+    darkModeEnabled: boolean;
+    animationsEnabled: boolean;
+}
+
 export interface User {
     id: string;
     fullName: string;
     email: string;
     phone: string;
+    password?: string;
     educationalLevel: string;
     governorate: string;
     enrolledCourses?: string[];
+    progress?: Record<string, number>;
     birthDate?: string;
     gender?: string;
     examResults?: StudentExamResult[];
