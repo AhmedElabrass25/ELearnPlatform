@@ -8,12 +8,28 @@ import { ProfileField } from "./ProfileField";
 import { ProfileSelectField } from "./ProfileSelectField";
 
 interface ProfileFormProps {
-    user: { fullName: string; email: string; phone: string; birthDate: string; gender: string; educationalLevel: string; governorate: string; };
+    user: { 
+        fullName: string; 
+        email: string; 
+        phone: string; 
+        birthDate?: string; 
+        gender?: string; 
+        educationalLevel: string; 
+        governorate: string; 
+    };
 }
 
 export function ProfileForm({ user }: ProfileFormProps) {
     const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({ ...user });
+    const [formData, setFormData] = useState({
+        fullName: user.fullName,
+        email: user.email,
+        phone: user.phone,
+        birthDate: user.birthDate || "",
+        gender: user.gender || "ذكر",
+        educationalLevel: user.educationalLevel,
+        governorate: user.governorate,
+    });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -21,7 +37,18 @@ export function ProfileForm({ user }: ProfileFormProps) {
     };
 
     const handleSave = () => { setIsEditing(false); console.log("Saving:", formData); };
-    const handleCancel = () => { setFormData({ ...user }); setIsEditing(false); };
+    const handleCancel = () => { 
+        setFormData({
+            fullName: user.fullName,
+            email: user.email,
+            phone: user.phone,
+            birthDate: user.birthDate || "",
+            gender: user.gender || "ذكر",
+            educationalLevel: user.educationalLevel,
+            governorate: user.governorate,
+        }); 
+        setIsEditing(false); 
+    };
 
     const genderOptions = [{ label: "ذكر", value: "ذكر" }, { label: "أنثى", value: "أنثى" }];
     const levelOptions = ["إعدادي", "ثانوية عامة", "أزهري", "جامعي", "خريج", "أخرى"].map(l => ({ label: l, value: l }));

@@ -13,7 +13,7 @@ export default function MyCoursesPage() {
     const user = mockData.users[0]; // Ahmad Mohamed Ali
 
     // Read enrolledCourses array & Match course IDs with mockData.courses
-    const enrolledCourses = user.enrolledCourses.map((courseId) => {
+    const enrolledCourses = (user.enrolledCourses || []).map((courseId) => {
         return mockData.courses.find((c) => c.id === courseId);
     }).filter((c): c is any => !!c); // Filter out any undefined courses
 
@@ -44,7 +44,7 @@ export default function MyCoursesPage() {
                         <CourseCard
                             key={course?.id}
                             course={course}
-                            progress={user.progress[course?.id as keyof typeof user.progress] || 0}
+                            progress={(user.progress && course?.id) ? user.progress[course.id] || 0 : 0}
                         />
                     ))}
                 </div>

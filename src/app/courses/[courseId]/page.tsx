@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { BookOpen, CheckCircle, Clock, PlayCircle, Star, Calendar, FileText, File, ClipboardCheck, ChevronDown, ChevronUp } from "lucide-react";
+import { BookOpen, CheckCircle, Clock, PlayCircle, Star, Calendar, FileText, File, ClipboardCheck } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Course, Lesson } from "@/types";
 
@@ -231,7 +231,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
                             </p>
                             <h4 className="font-bold mb-2">الإنجازات:</h4>
                             <ul className="space-y-2">
-                                {mockData.instructor.achievements.map((achievement, i) => (
+                                {mockData.instructor.achievements?.map((achievement, i) => (
                                     <li key={i} className="flex gap-2 items-center text-muted-foreground">
                                         <CheckCircle className="w-4 h-4 text-primary" />
                                         <span>{achievement}</span>

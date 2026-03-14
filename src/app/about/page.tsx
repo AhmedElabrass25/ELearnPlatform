@@ -49,7 +49,7 @@ export default function AboutPage() {
             <div className="space-y-8 mb-20">
                 <h2 className="text-3xl font-bold tracking-tight text-center mb-12">الإنجازات والجوائز</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {instructor.achievements.map((achievement, idx) => (
+                    {instructor.achievements?.map((achievement, idx) => (
                         <Card key={idx} className="bg-muted/30 border-none shadow-none text-center p-6">
                             <CardContent className="pt-6 border-b-2 border-primary/20 hover:border-primary transition-colors h-full flex flex-col items-center justify-center">
                                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">

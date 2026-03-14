@@ -21,9 +21,9 @@ export default function CoursesPage() {
     };
 
     const filteredCourses = mockData.courses.filter(course => {
-        const matchesSearch = course.title.includes(searchQuery) || course.topic.includes(searchQuery);
+        const matchesSearch = course.title.includes(searchQuery) || (course.topic || "").includes(searchQuery);
         const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(course.level);
-        const matchesTopic = selectedTopics.length === 0 || selectedTopics.includes(course.topic);
+        const matchesTopic = selectedTopics.length === 0 || (course.topic ? selectedTopics.includes(course.topic) : false);
         const matchesType = selectedTypes.length === 0 || selectedTypes.includes(course.type);
 
         return matchesSearch && matchesLevel && matchesTopic && matchesType;
@@ -156,7 +156,7 @@ export default function CoursesPage() {
                                         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
                                             <div className="flex items-center gap-1">
                                                 <BookOpen className="w-4 h-4" />
-                                                <span>{course.topic}</span>
+                                                <span>{course.topic || "عام"}</span>
                                             </div>
                                             <div className="flex items-center gap-1">
                                                 <Clock className="w-4 h-4" />

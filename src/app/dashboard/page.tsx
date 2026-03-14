@@ -21,7 +21,7 @@ export default function DashboardHomePage() {
     const totalPaths = mockData.paths.length;
 
     // Count total enrollments
-    const totalEnrollments = mockData.users.reduce((acc, user) => acc + user.enrolledCourses.length, 0);
+    const totalEnrollments = mockData.users.reduce((acc, user) => acc + (user.enrolledCourses?.length || 0), 0);
 
     // Count total lessons across all courses
     const totalLessons = Object.values(mockData.lessons).reduce((acc, lessonsArray) => acc + lessonsArray.length, 0);

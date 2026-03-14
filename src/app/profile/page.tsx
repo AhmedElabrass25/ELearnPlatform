@@ -10,11 +10,11 @@ import { ContinueLearning } from "@/components/profile/ContinueLearning";
 
 export default function ProfilePage() {
     const user = mockData.users[0];
-    const totalCourses = user.enrolledCourses.length;
+    const totalCourses = user.enrolledCourses?.length || 0;
     let totalProgress = 0, completedCount = 0;
 
-    user.enrolledCourses.forEach(id => {
-        const p = user.progress[id as keyof typeof user.progress] || 0;
+    user.enrolledCourses?.forEach(id => {
+        const p = user.progress ? user.progress[id] || 0 : 0;
         totalProgress += p;
         if (p === 100) completedCount++;
     });
@@ -31,7 +31,7 @@ export default function ProfilePage() {
                 </div>
                 <div className="space-y-6">
                     <ProfileStats totalCourses={totalCourses} avgProgress={avgProgress} completedCount={completedCount} />
-                    <ContinueLearning enrolledCourseIds={user.enrolledCourses} progress={user.progress as unknown as Record<string, number>} />
+                    <ContinueLearning enrolledCourseIds={user.enrolledCourses || []} progress={(user.progress as any) || {}} />
                 </div>
             </div>
         </div>
