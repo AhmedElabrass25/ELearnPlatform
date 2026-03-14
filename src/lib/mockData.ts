@@ -80,7 +80,107 @@ export const mockData = {
       "duration": "14 ساعة",
       "image": "/images/course-jan-beginner.jpg",
       "isPopular": true,
-      "startDate": "2026-01-10"
+      "startDate": "2026-01-10",
+      "weeks": [
+        {
+          "id": "w1",
+          "title": "الأسبوع الأول: مدخل إلى اللغة العربية",
+          "order": 1,
+          "lessons": [
+            {
+              "id": "1",
+              "title": "الدرس الأول: الحروف العربية ونطقها الصحيح",
+              "duration": "45 دقيقة",
+              "youtubeId": "_iuxZygxz98",
+              "thumbnail": "https://img.youtube.com/vi/5qap5aO7vU0/maxresdefault.jpg",
+              "description": "تعلم الحروف العربية من الصفر مع نطقها الصحيح وطريقة الكتابة",
+              "isFree": true,
+              "order": 1
+            },
+            {
+              "id": "2",
+              "title": "الدرس الثاني: الكلمات الأساسية والتحية اليومية",
+              "duration": "52 دقيقة",
+              "youtubeId": "9bZkp7q19f0",
+              "thumbnail": "https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg",
+              "description": "أول 50 كلمة عربية يومية + جمل التحية والسلام",
+              "isFree": false,
+              "order": 2
+            }
+          ],
+          "materials": [
+            {
+              "id": "m1",
+              "title": "دليل الحروف الهجائية (PDF)",
+              "type": "pdf",
+              "content": "/files/arabic-alphabet.pdf",
+              "createdAt": "2026-03-01",
+              "order": 1
+            },
+            {
+              "id": "m2",
+              "title": "ملاحظات حول نطق الحروف",
+              "type": "note",
+              "content": "تأكد من ممارسة نطق الحروف الحلقية يومياً لمدة 10 دقائق.",
+              "createdAt": "2026-03-02",
+              "order": 2
+            }
+          ],
+          "exams": []
+        },
+        {
+          "id": "w2",
+          "title": "الأسبوع الثاني: القواعد الأساسية",
+          "order": 2,
+          "lessons": [
+            {
+              "id": "3",
+              "title": "الدرس الثالث: الاسم والنكرة والمعرفة",
+              "duration": "61 دقيقة",
+              "youtubeId": "3Z3Z3Z3Z3Z",
+              "thumbnail": "https://img.youtube.com/vi/3Z3Z3Z3Z3Z/maxresdefault.jpg",
+              "description": "قواعد النكرة والمعرفة مع أمثلة عملية كثيرة",
+              "isFree": false,
+              "order": 3
+            }
+          ],
+          "materials": [
+            {
+              "id": "m3",
+              "title": "جدول الأسماء النكرة والمعرفة",
+              "type": "attachment",
+              "content": "/files/noun-table.xlsx",
+              "createdAt": "2026-03-10",
+              "order": 1
+            }
+          ],
+          "exams": [
+            {
+              "id": "ex1",
+              "title": "اختبار القواعد القصير",
+              "description": "اختبار سريع لقياس فهمك لدرس النكرة والمعرفة",
+              "createdAt": "2026-03-12",
+              "questions": [
+                {
+                  "id": "q1",
+                  "text": "ما هو تعريف النكرة؟",
+                  "type": "mcq",
+                  "options": ["اسم يدل على شيء معين", "اسم يدل على شيء غير معين", "فعل ماضي", "حرف جر"],
+                  "correctAnswer": "اسم يدل على شيء غير معين",
+                  "score": 5
+                },
+                {
+                  "id": "q2",
+                  "text": "كلمة 'الكتاب' هي معرفة.",
+                  "type": "true-false",
+                  "correctAnswer": true,
+                  "score": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "feb-intermediate-center",
@@ -93,7 +193,8 @@ export const mockData = {
       "lessonsCount": 18,
       "examsCount": 4,
       "duration": "16 ساعة",
-      "image": "/images/course-feb-intermediate.jpg"
+      "image": "/images/course-feb-intermediate.jpg",
+      "weeks": []
     },
     {
       "id": "full-term-advanced",
@@ -106,7 +207,8 @@ export const mockData = {
       "lessonsCount": 42,
       "examsCount": 8,
       "duration": "38 ساعة",
-      "image": "/images/course-full-advanced.jpg"
+      "image": "/images/course-full-advanced.jpg",
+      "weeks": []
     },
     {
       "id": "quranic-arabic",
@@ -119,7 +221,8 @@ export const mockData = {
       "lessonsCount": 20,
       "examsCount": 2,
       "duration": "18 ساعة",
-      "image": "/images/course-quranic.jpg"
+      "image": "/images/course-quranic.jpg",
+      "weeks": []
     }
   ],
   "lessons": {

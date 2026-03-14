@@ -6,7 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { BookOpen, CheckCircle, Clock, PlayCircle, Star, Calendar } from "lucide-react";
+import { BookOpen, CheckCircle, Clock, PlayCircle, Star, Calendar, FileText, File, ClipboardCheck, ChevronDown, ChevronUp } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Course, Lesson } from "@/types";
 
 interface CoursePageProps {
     params: Promise<{ courseId: string }>;
@@ -105,42 +107,121 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 </TabsList>
 
                 <TabsContent value="lessons" className="mt-0">
-                    <div className="border rounded-xl bg-card overflow-hidden shadow-sm flex flex-col">
-                        <div className="bg-muted/50 p-4 font-bold border-b">
-                            الدروس ({lessons.length})
-                        </div>
+                    <div className="space-y-6">
+                        {course.weeks && course.weeks.length > 0 ? (
+                            <Accordion type="single" collapsible className="w-full space-y-4">
+                                {course.weeks.map((week, idx: number) => (
+                                    <AccordionItem key={week.id} value={week.id} className="border rounded-xl bg-card px-4 shadow-sm overflow-hidden">
+                                        <AccordionTrigger className="hover:no-underline py-4">
+                                            <div className="flex items-center gap-4 text-right justify-start w-full">
+                                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                                                    {idx + 1}
+                                                </div>
+                                                <div className="text-right">
+                                                    <h3 className="text-lg font-bold">{week.title}</h3>
+                                                    <p className="text-sm text-muted-foreground">
+                                                        {week.lessons.length} دروس • {week.materials.length} مواد • {week.exams.length} اختبارات
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </AccordionTrigger>
+                                        <AccordionContent className="pb-4 pt-2">
+                                            <div className="space-y-2 border-t pt-4">
+                                                {/* Lessons */}
+                                                {week.lessons.map((lesson: Lesson) => (
+                                                    <Link
+                                                        key={lesson.id}
+                                                        href={`/lessons/${course.id}/${lesson.id}`}
+                                                        className="p-3 hover:bg-muted/50 rounded-lg transition-colors flex items-center gap-4 group"
+                                                    >
+                                                        <PlayCircle className="w-5 h-5 text-primary opacity-70 group-hover:opacity-100" />
+                                                        <div className="flex-1">
+                                                            <h4 className="font-medium group-hover:text-primary transition-colors">{lesson.title}</h4>
+                                                            <p className="text-xs text-muted-foreground">{lesson.duration}</p>
+                                                        </div>
+                                                        {lesson.isFree && <Badge variant="outline" className="text-[10px] border-green-500 text-green-500">مجاني</Badge>}
+                                                    </Link>
+                                                ))}
 
-                        <ScrollArea className="h-[500px]">
-                            <div className="flex flex-col divide-y">
-                                {lessons.map((lesson, idx) => (
-                                    <Link
-                                        key={lesson.id}
-                                        href={`/lessons/${course.id}/${lesson.id}`}
-                                        className="p-4 hover:bg-muted/30 transition-colors flex items-center gap-4 group"
-                                    >
-                                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold group-hover:bg-primary group-hover:text-white transition-colors">
-                                            {idx + 1}
-                                        </div>
-                                        <div className="flex-1">
-                                            <h4 className="font-bold mb-1 group-hover:text-primary transition-colors">{lesson.title}</h4>
-                                            <p className="text-sm text-muted-foreground line-clamp-1">{lesson.description}</p>
-                                        </div>
-                                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                            {lesson.isFree && <Badge variant="outline" className="border-green-500 text-green-500 hidden sm:inline-flex">مجاني</Badge>}
-                                            <span>{lesson.duration}</span>
-                                            <PlayCircle className="w-5 h-5 opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all" />
-                                        </div>
-                                    </Link>
+                                                {/* Materials */}
+                                                {week.materials.map((material) => (
+                                                    <div
+                                                        key={material.id}
+                                                        className="p-3 hover:bg-muted/50 rounded-lg transition-colors flex items-center gap-4 group cursor-pointer"
+                                                    >
+                                                        {material.type === 'pdf' ? (
+                                                            <FileText className="w-5 h-5 text-red-500 opacity-70 group-hover:opacity-100" />
+                                                        ) : material.type === 'note' ? (
+                                                            <File className="w-5 h-5 text-blue-500 opacity-70 group-hover:opacity-100" />
+                                                        ) : (
+                                                            <File className="w-5 h-5 text-amber-500 opacity-70 group-hover:opacity-100" />
+                                                        )}
+                                                        <div className="flex-1">
+                                                            <h4 className="font-medium group-hover:text-primary transition-colors">{material.title}</h4>
+                                                            <p className="text-xs text-muted-foreground">{material.type.toUpperCase()}</p>
+                                                        </div>
+                                                        <Button size="sm" variant="ghost" className="h-8 text-xs">تحميل</Button>
+                                                    </div>
+                                                ))}
+
+                                                {/* Exams */}
+                                                {week.exams.map((exam) => (
+                                                    <Link
+                                                        key={exam.id}
+                                                        href={`/courses/${course.id}/exam/${exam.id}`}
+                                                        className="p-3 bg-primary/5 hover:bg-primary/10 rounded-lg transition-colors flex items-center gap-4 group border border-primary/20"
+                                                    >
+                                                        <ClipboardCheck className="w-5 h-5 text-primary opacity-70 group-hover:opacity-100" />
+                                                        <div className="flex-1">
+                                                            <h4 className="font-bold text-primary group-hover:underline transition-colors">{exam.title}</h4>
+                                                            <p className="text-xs text-primary/70">{exam.questions.length} أسئلة</p>
+                                                        </div>
+                                                        <Badge className="bg-primary text-white text-[10px]">ابدأ الاختبار</Badge>
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </AccordionContent>
+                                    </AccordionItem>
                                 ))}
+                            </Accordion>
+                        ) : (
+                            <div className="border rounded-xl bg-card overflow-hidden shadow-sm flex flex-col">
+                                <div className="bg-muted/50 p-4 font-bold border-b">
+                                    الدروس ({lessons.length})
+                                </div>
+                                <ScrollArea className="h-[500px]">
+                                    <div className="flex flex-col divide-y">
+                                        {lessons.map((lesson: Lesson, idx: number) => (
+                                            <Link
+                                                key={lesson.id}
+                                                href={`/lessons/${course.id}/${lesson.id}`}
+                                                className="p-4 hover:bg-muted/30 transition-colors flex items-center gap-4 group"
+                                            >
+                                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold group-hover:bg-primary group-hover:text-white transition-colors">
+                                                    {idx + 1}
+                                                </div>
+                                                <div className="flex-1">
+                                                    <h4 className="font-bold mb-1 group-hover:text-primary transition-colors">{lesson.title}</h4>
+                                                    <p className="text-sm text-muted-foreground line-clamp-1">{lesson.description}</p>
+                                                </div>
+                                                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                                    {lesson.isFree && <Badge variant="outline" className="border-green-500 text-green-500 hidden sm:inline-flex">مجاني</Badge>}
+                                                    <span>{lesson.duration}</span>
+                                                    <PlayCircle className="w-5 h-5 opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all" />
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </ScrollArea>
                             </div>
-                        </ScrollArea>
+                        )}
                     </div>
                 </TabsContent>
 
                 <TabsContent value="instructor" className="mt-0 pt-4">
                     <div className="flex gap-6 items-start">
                         <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                            <span className="text-3xl font-bold text-primary">{mockData.instructor.name}</span>
+                            <span className="text-3xl font-bold text-primary">{mockData.instructor.name.charAt(0)}</span>
                         </div>
                         <div>
                             <h3 className="text-2xl font-bold mb-1">أستاذ {mockData.instructor.name}</h3>
