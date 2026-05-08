@@ -1,29 +1,41 @@
-"use client";
+import React from "react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { getMe } from "@/services/auth.service";
+import { DashboardLayoutClient } from "./DashboardLayoutClient";
 
-import React, { useState } from "react";
-import { DashboardSidebar } from "@/components/DashboardSidebar";
-import { DashboardTopbar } from "@/components/DashboardTopbar";
-
-export default function DashboardLayout({
+export default async function DashboardLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value || cookieStore.get("jwt")?.value;
 
-    return (
-        <div className="flex h-screen bg-background overflow-hidden selection:bg-primary/20 selection:text-primary">
-            {/* Sidebar */}
-            <DashboardSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+    if (!token) {
+        redirect("/login");
+    }
 
-            {/* Main Content Wrapper */}
-            <div className="flex-1 flex flex-col h-screen overflow-hidden relative min-w-0">
-                <DashboardTopbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+    try {
+        // 1. Check the persistent role cookie first (set during login)
+        const userRole = cookieStore.get("userRole")?.value;
+        
+        // 2. Fallback to API check if cookie is missing
+        const user = userRole === "admin" ? null : await getMe().catch((e: any) => { console.error("getMe DashboardLayout Fallback Issue:", e); return null; });
+        const apiRole = user?.role || (user as any)?.data?.role;
+        
+        // Final role determination
+        const finalRole = userRole || apiRole;
 
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-muted/10 p-4 md:p-6 lg:p-8">
-                    {children}
-                </main>
-            </div>
-        </div>
-    );
+        // RBAC Check: Only admin can access dashboard
+        if (finalRole !== "admin") {
+            console.log(`Access denied: Required role 'admin', found '${finalRole}'`);
+            redirect("/");
+        }
+
+        return <DashboardLayoutClient>{children}</DashboardLayoutClient>;
+    } catch (error: any) {
+        console.error("Dashboard layout auth error:", error);
+        redirect("/login");
+    }
 }

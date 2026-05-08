@@ -17,6 +17,7 @@ interface ProfileSelectFieldProps {
 
 export function ProfileSelectField({
     label,
+    name,
     value,
     isEditing,
     onValueChange,

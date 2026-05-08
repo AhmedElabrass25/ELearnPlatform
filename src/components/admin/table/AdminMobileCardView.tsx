@@ -12,7 +12,7 @@ interface AdminMobileCardViewProps<T> {
     hasActions: boolean;
 }
 
-export function AdminMobileCardView<T extends { id: string | number }>({
+export function AdminMobileCardView<T>({
     data,
     columns,
     onEdit,
@@ -29,8 +29,8 @@ export function AdminMobileCardView<T extends { id: string | number }>({
 
     return (
         <div className="md:hidden space-y-3">
-            {data.map((item) => (
-                <div key={item.id} className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
+            {data.map((item, index) => (
+                <div key={(item as any).id || (item as any)._id || index} className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
                     <div className="p-4 space-y-2.5">
                         {columns.map((col, i) => (
                             <div key={i} className="flex flex-col gap-0.5">
@@ -43,7 +43,7 @@ export function AdminMobileCardView<T extends { id: string | number }>({
                             </div>
                         ))}
                     </div>
-                    {hasActions && (
+                    {/* {hasActions && (
                         <div className="px-4 py-3 bg-muted/30 border-t border-border flex gap-2 justify-end">
                             {onEdit && (
                                 <Button
@@ -68,7 +68,7 @@ export function AdminMobileCardView<T extends { id: string | number }>({
                                 </Button>
                             )}
                         </div>
-                    )}
+                    )} */}
                 </div>
             ))}
         </div>

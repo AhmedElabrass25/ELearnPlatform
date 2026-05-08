@@ -19,6 +19,7 @@ interface AdminModalProps {
     onSubmit?: (e: React.FormEvent) => void;
     submitLabel?: string;
     isDestructive?: boolean;
+    isLoading?: boolean;
 }
 
 export function AdminModal({
@@ -29,7 +30,8 @@ export function AdminModal({
     children,
     onSubmit,
     submitLabel = "حفظ",
-    isDestructive = false
+    isDestructive = false,
+    isLoading = false
 }: AdminModalProps) {
     return (
         <Dialog open={isOpen} onOpenChange={(open: boolean) => !open && onClose()}>
@@ -51,8 +53,10 @@ export function AdminModal({
                             <Button
                                 type="submit"
                                 variant={isDestructive ? "destructive" : "default"}
-                                className="rounded-xl"
+                                className="rounded-xl gap-2 font-bold"
+                                disabled={isLoading}
                             >
+                                {isLoading && <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
                                 {submitLabel}
                             </Button>
                         </div>

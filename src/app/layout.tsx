@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import "./globals.css";
 import { Cairo } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import "./globals.css";
+import { Toaster } from "sonner";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
+          <Toaster richColors closeButton position="top-right" dir="rtl" />
         </ThemeProvider>
       </body>
     </html>

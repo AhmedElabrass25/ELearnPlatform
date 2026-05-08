@@ -36,12 +36,6 @@ export function DashboardTopbar({ onToggleSidebar }: DashboardTopbarProps) {
                     <span className="sr-only">تغيير المظهر</span>
                 </Button>
 
-                {/* Notifications */}
-                <Button variant="ghost" size="icon" className="rounded-full bg-muted/50 hover:bg-muted relative">
-                    <Bell size={20} />
-                    <span className="absolute top-1 right-1.5 w-2 h-2 bg-destructive rounded-full"></span>
-                </Button>
-
                 {/* Admin Profile */}
                 <div className="flex items-center gap-2 pl-2 border-r border-border mr-2">
                     <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold overflow-hidden">

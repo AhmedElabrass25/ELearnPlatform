@@ -1,0 +1,21 @@
+src/app/courses/[courseId]/components/CourseHeader.tsx(25,57): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number | Date'.
+      Type 'undefined' is not assignable to type 'string | number | Date'.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'string | undefined' is not assignable to parameter of type 'string | number'.
+      Type 'undefined' is not assignable to type 'string | number'.
+src/app/courses/[courseId]/exam/[examId]/ExamClient.tsx(78,35): error TS18048: 'q.score' is possibly 'undefined'.
+src/app/courses/[courseId]/exam/[examId]/ExamClient.tsx(82,35): error TS18048: 'q.score' is possibly 'undefined'.
+src/app/courses/[courseId]/exam/[examId]/ExamClient.tsx(100,67): error TS18048: 'q.score' is possibly 'undefined'.
+src/app/courses/[courseId]/exam/[examId]/ExamClient.tsx(242,94): error TS2322: Type 'QuestionOption' is not assignable to type 'ReactNode'.
+src/app/dashboard/courses/[courseId]/CourseDetailClient.tsx(23,88): error TS2554: Expected 2 arguments, but got 3.
+src/app/dashboard/layout.tsx(24,64): error TS2554: Expected 0 arguments, but got 1.
+src/app/dashboard/layout.tsx(25,45): error TS2339: Property 'data' does not exist on type 'User'.
+src/app/profile/page.tsx(21,28): error TS2554: Expected 0 arguments, but got 1.
+src/components/Navbar.tsx(24,32): error TS2554: Expected 0 arguments, but got 1.
+src/lib/mockData.ts(181,31): error TS2322: Type 'string' is not assignable to type 'QuestionOption'.
+src/lib/mockData.ts(181,55): error TS2322: Type 'string' is not assignable to type 'QuestionOption'.
+src/lib/mockData.ts(181,83): error TS2322: Type 'string' is not assignable to type 'QuestionOption'.
+src/lib/mockData.ts(181,95): error TS2322: Type 'string' is not assignable to type 'QuestionOption'.
+src/lib/mockData.ts(185,17): error TS2739: Type '{ id: string; text: string; type: string; correctAnswer: true; score: number; }' is missing the following properties from type 'Question': questionText, options, mark

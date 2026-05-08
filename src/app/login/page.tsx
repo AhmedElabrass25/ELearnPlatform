@@ -1,24 +1,16 @@
-"use client";
-
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { BookOpen, CheckCircle } from "lucide-react";
+import LoginForm from "./LoginForm";
 
-export default function LoginPage() {
-    const [isLoading, setIsLoading] = useState(false);
+export default async function LoginPage() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
-        // Mock login delay
-        setTimeout(() => {
-            setIsLoading(false);
-            window.location.href = "/";
-        }, 1000);
-    };
+    if (token) {
+        redirect("/");
+    }
 
     return (
         <div className="min-h-[calc(100vh-4rem)] flex flex-col lg:flex-row">
@@ -75,27 +67,7 @@ export default function LoginPage() {
                         <p className="text-muted-foreground">أدخل بياناتك للوصول لحسابك</p>
                     </div>
 
-                    <form onSubmit={onSubmit} className="space-y-6">
-                        <div className="space-y-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="email" className="font-bold">البريد الإلكتروني أو رقم الهاتف</Label>
-                                <Input id="email" type="text" placeholder="أدخل بريدك أو رقمك" required className="h-12 bg-muted/50 border-transparent focus:border-primary focus:bg-background" />
-                            </div>
-                            <div className="space-y-2 flex flex-col">
-                                <div className="flex items-center justify-between">
-                                    <Label htmlFor="password" className="font-bold">كلمة المرور</Label>
-                                </div>
-                                <Input id="password" type="password" placeholder="••••••••" required className="h-12 bg-muted/50 border-transparent focus:border-primary focus:bg-background text-left" dir="ltr" />
-                                <Link href="#" className="text-sm font-medium text-primary hover:underline self-end pt-1">
-                                    نسيت كلمة المرور؟
-                                </Link>
-                            </div>
-                        </div>
-
-                        <Button className="w-full h-12 text-base font-bold shadow-lg shadow-primary/20" type="submit" disabled={isLoading}>
-                            {isLoading ? "جاري الدخول..." : "تسجيل الدخول"}
-                        </Button>
-                    </form>
+                  <LoginForm/>
 
                     <div className="text-center pt-8 border-t border-border/50">
                         <p className="text-muted-foreground">

@@ -9,6 +9,7 @@ export const metadata = {
 };
 
 export default function MyCoursesPage() {
+  
     // Get the logged in user from mockData.users
     const user = mockData.users[0]; // Ahmad Mohamed Ali
 

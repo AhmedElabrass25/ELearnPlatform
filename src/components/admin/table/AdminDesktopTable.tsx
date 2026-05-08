@@ -20,7 +20,7 @@ interface AdminDesktopTableProps<T> {
     hasActions: boolean;
 }
 
-export function AdminDesktopTable<T extends { id: string | number }>({
+export function AdminDesktopTable<T>({
     data,
     columns,
     onEdit,
@@ -50,15 +50,15 @@ export function AdminDesktopTable<T extends { id: string | number }>({
                     </TableHeader>
                     <TableBody>
                         {data.length > 0 ? (
-                            data.map((item) => (
+                            data.map((item, index) => (
                                 <TableRow
-                                    key={item.id}
+                                    key={(item as any).id || (item as any)._id || index}
                                     className="hover:bg-muted/30 transition-colors border-border"
                                 >
                                     {columns.map((col, i) => (
                                         <TableCell key={i} className="py-3.5 first:pr-6">
                                             <div className="max-w-[230px] truncate">
-                                                {col.render ? col.render(item) : String(item[col.key as keyof T] ?? "-")}
+                                                {col.render ? col.render(item) : String((item as any)[col.key] ?? "-")}
                                             </div>
                                         </TableCell>
                                     ))}

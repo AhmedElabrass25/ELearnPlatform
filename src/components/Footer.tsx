@@ -8,7 +8,7 @@ export function Footer() {
                 <div className="md:col-span-1 space-y-4">
                     <Link href="/" className="flex items-center gap-2 text-primary">
                         <BookOpen className="h-8 w-8" />
-                        <span className="font-bold text-xl">أكاديمية محمد</span>
+                        <span className="font-bold text-xl">أكاديمية البيان</span>
                     </Link>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                         منصة تعليمية رائدة تهدف إلى تيسير لغة القرآن وتوصيل مبادئ النحو والصرف والبلاغة بأكثر الطرق ابتكاراً وسهولة تحت إشراف أستاذ محمد.

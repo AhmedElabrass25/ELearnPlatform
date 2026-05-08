@@ -41,18 +41,7 @@ export function CourseFilters({
                     />
                 </div>
                 <div className="flex gap-2 flex-wrap w-full sm:w-auto">
-                    <Select value={filterLevel} onValueChange={setFilterLevel}>
-                        <SelectTrigger className="rounded-xl w-full sm:w-36 h-10">
-                            <Filter size={14} className="ml-1 opacity-60" />
-                            <SelectValue placeholder="المستوى" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="all">كل المستويات</SelectItem>
-                            <SelectItem value="مبتدئ">مبتدئ</SelectItem>
-                            <SelectItem value="متوسط">متوسط</SelectItem>
-                            <SelectItem value="متقدم">متقدم</SelectItem>
-                        </SelectContent>
-                    </Select>
+                    {/* Level filter removed as per user request */}
                     <Select value={filterPath} onValueChange={setFilterPath}>
                         <SelectTrigger className="rounded-xl w-full sm:w-44 h-10">
                             <Filter size={14} className="ml-1 opacity-60" />

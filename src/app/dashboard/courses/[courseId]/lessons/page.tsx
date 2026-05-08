@@ -6,8 +6,9 @@ import { ArrowRight, Plus, PlayCircle } from "lucide-react";
 import { mockData } from "@/lib/mockData";
 import { Button } from "@/components/ui/button";
 import { Lesson } from "@/types";
-import { CourseBuilderItem } from "@/components/dashboard/CourseBuilderItem";
-import { CourseBuilderModal, CourseBuilderDeleteModal } from "@/components/dashboard/CourseBuilderModals";
+import { CourseBuilderItem } from "@/components/dashboard/CourseBuilderItem/CourseBuilderItem";
+import { CourseBuilderModal } from "@/components/dashboard/CourseBuilderModals/CourseBuilderModal";
+import { CourseBuilderDeleteModal } from "@/components/dashboard/CourseBuilderModals/CourseBuilderDeleteModal";
 
 export default function CourseBuilderPage() {
     const params = useParams();

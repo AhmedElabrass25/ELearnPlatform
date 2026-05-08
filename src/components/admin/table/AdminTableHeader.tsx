@@ -1,21 +1,20 @@
 "use client";
-
-import React from "react";
 import { Search, Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { User } from "@/types";
 
-interface AdminTableHeaderProps {
+interface AdminTableHeaderProps<T> {
     title: string;
     description?: string;
-    searchKey?: string;
+    searchKey?:(keyof T)[];
     searchPlaceholder?: string;
     searchTerm: string;
     onSearchChange: (value: string) => void;
     onAdd?: () => void;
 }
 
-export function AdminTableHeader({
+export function AdminTableHeader<T>({
     title,
     description,
     searchKey,
@@ -23,7 +22,7 @@ export function AdminTableHeader({
     searchTerm,
     onSearchChange,
     onAdd,
-}: AdminTableHeaderProps) {
+}: AdminTableHeaderProps<T>) {
     return (
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-card p-5 rounded-2xl border border-border shadow-sm">
             <div>

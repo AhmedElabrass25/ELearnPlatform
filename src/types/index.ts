@@ -11,66 +11,98 @@ export interface Material {
 
 export interface Lesson {
     id: string;
+    _id?: string;
+    weekId?: string;
     title: string;
     description: string;
     duration: string;
     youtubeId: string;
     thumbnail: string;
     videoUrl?: string;
+    type?: string;
+    contentUrl?: string;
+    fullContentUrl?: string;
     order: number;
     isFree: boolean;
+    isPublished?: boolean;
+    active?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
-export type QuestionType = 'mcq' | 'true-false' | 'single-select';
+export interface QuestionOption {
+    _id?: string;
+    id?: string;
+    text: string;
+    isCorrect: boolean;
+}
 
 export interface Question {
+    _id?: string;
     id: string;
-    text: string;
-    type: QuestionType;
-    options?: string[]; // Required for mcq and single-select
-    correctAnswer: string | boolean;
-    score: number;
+    questionText: string;
+    options: QuestionOption[];
+    mark: number;
+    // legacy compat
+    text?: string;
+    score?: number;
+    type?: string;
+    correctAnswer?: string | boolean;
 }
 
 export interface Exam {
     id: string;
+    _id?: string;
+    weekId?: string;
+    courseId?: string;
     title: string;
     description: string;
+    duration?: number;       // minutes
+    totalMarks?: number;     // total marks for the exam
+    availableFrom?: string;
+    availableUntil?: string;
+    isPublished?: boolean;
     questions: Question[];
     createdAt: string;
 }
 
 export interface Week {
-    id: string;
-    title: string;
-    order: number;
-    lessons: Lesson[];
-    materials: Material[];
-    exams: Exam[];
+  _id: string;
+  title: string;
+  description: string;
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
 }
 
 export interface Course {
     id: string;
+    _id?: string;
     title: string;
-    subtitle?: string;
+    description?: string ;
     price: number;
-    currency?: string;
-    level: string;
-    type: string;
-    topic?: string;
-    duration: string;
-    pathId: string;
-    image?: string;
-    lessonsCount?: number;
-    examsCount?: number;
-    isPopular?: boolean;
-    startDate?: string;
+    durationInWeeks?: number;
+    pathId?: string;
+    track?: {
+        _id: string;
+        name: string;
+        title?: string;
+        coverImageUrl?:string;
+        id?: string;
+    };
+    coverImage?:string
+    isPublished?: boolean;
+    active?: boolean;
     weeks?: Week[];
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface Path {
     id: string;
-    title: string;
+    _id?: string;
+    name: string;
     slug: string;
     description: string;
     coursesCount?: number;
@@ -78,6 +110,7 @@ export interface Path {
     examsCount?: number;
     duration: string;
     image?: string;
+    coverImage:string
 }
 
 export interface Testimonial {
@@ -105,10 +138,11 @@ export interface User {
     email: string;
     phone: string;
     password?: string;
-    educationalLevel: string;
+    educationLevel: string;
     governorate: string;
     enrolledCourses?: string[];
     progress?: Record<string, number>;
+    role?: string;
     birthDate?: string;
     gender?: string;
     examResults?: StudentExamResult[];
@@ -130,4 +164,9 @@ export interface Instructor {
     bio: string;
     avatar: string;
     achievements?: string[];
+}
+export interface IWeekContent{
+    week:Week,
+    lessons:Lesson[],
+    exams:Exam[]
 }

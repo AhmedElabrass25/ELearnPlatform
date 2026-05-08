@@ -5,8 +5,9 @@ import { motion } from "framer-motion";
 
 interface PathHeaderProps {
     path: {
-        slug: string;
-        title: string;
+        slug?: string;
+        name?: string;
+        title?: string;
         description: string;
     };
 }
@@ -21,8 +22,8 @@ export function PathHeader({ path }: PathHeaderProps) {
             <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
             <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/5 rounded-full blur-2xl translate-y-1/2 translate-x-1/4" />
             <div className="relative z-10">
-                <p className="text-white/70 text-sm mb-2 font-mono">{path.slug}</p>
-                <h1 className="text-3xl font-bold mb-3">{path.title}</h1>
+                {path.slug && <p className="text-white/70 text-sm mb-2 font-mono">{path.slug}</p>}
+                <h1 className="text-3xl font-bold mb-3">{path.name || path.title}</h1>
                 <p className="text-white/80 max-w-2xl leading-relaxed">{path.description}</p>
             </div>
         </motion.div>

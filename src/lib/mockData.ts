@@ -1,5 +1,5 @@
 import { Course, Lesson, Path, Instructor, User, Settings, Testimonial, FAQ } from "@/types";
-
+import arabicInstructor from ""
 export const mockData: {
   site: { name: string; logo: string; tagline: string; description: string };
   instructor: Instructor;
@@ -13,8 +13,8 @@ export const mockData: {
   faqs: FAQ[];
 } = {
   "site": {
-    "name": "أكاديمية محمد للغة العربية",
-    "logo": "/logo.svg",
+    "name": "أكاديمية البيان",
+    "logo": "",
     "tagline": "تعلم اللغة العربية بطريقة سهلة وممتعة",
     "description": "انضم إلى آلاف الطلاب الذين أتقنوا اللغة العربية مع أفضل منهج متكامل في النحو والصرف والبلاغة والأدب"
   },
@@ -22,7 +22,7 @@ export const mockData: {
     "id": "1",
     "name": "محمد",
     "title": "مدرس اللغة العربية والنحو",
-    "avatar": "/images/mohamed.jpg",
+    "avatar": "/arabic_instructor.webp",
     "bio": "مدرس متخصص في تدريس اللغة العربية لكل المستويات بطريقة مبسطة وتفاعلية، 8 سنوات خبرة في تدريس الثانوية والجامعات",
     "achievements": ["أفضل مدرس نحو 2025", "أكثر من 15000 طالب ناجح", "دورات أونلاين وسنتر"]
   },

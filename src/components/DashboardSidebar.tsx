@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -14,17 +11,19 @@ import {
     Settings,
     LogOut,
     X,
+    ClipboardList,
 } from "lucide-react";
 
 const allLinks = [
     { href: "/dashboard", label: "الرئيسية", icon: LayoutDashboard },
     { href: "/dashboard/users", label: "المستخدمين", icon: Users },
-    { href: "/dashboard/instructors", label: "المعلمين", icon: GraduationCap },
+    // { href: "/dashboard/instructors", label: "المعلمين", icon: GraduationCap },
     { href: "/dashboard/paths", label: "المسارات", icon: Map },
     { href: "/dashboard/courses", label: "الكورسات", icon: BookOpen },
-    { href: "/dashboard/testimonials", label: "الآراء", icon: MessageSquare },
+    { href: "/dashboard/user-attempts", label: "نتائج الاختبارات", icon: ClipboardList },
+    // { href: "/dashboard/testimonials", label: "الآراء", icon: MessageSquare },
     { href: "/dashboard/faqs", label: "الأسئلة الشائعة", icon: HelpCircle },
-    { href: "/dashboard/settings", label: "الإعدادات", icon: Settings },
+    // { href: "/dashboard/settings", label: "الإعدادات", icon: Settings },
 ];
 
 // ─── Sidebar inner content (extracted to top-level to satisfy react-hooks rules) ───

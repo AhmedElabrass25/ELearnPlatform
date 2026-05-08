@@ -17,7 +17,7 @@ interface AdminTableProps<T> {
     description?: string;
     data: T[];
     columns: Column<T>[];
-    searchKey?: Extract<keyof T, string>;
+    searchKey?: (keyof T)[];
     searchPlaceholder?: string;
     onAdd?: () => void;
     onEdit?: (item: T) => void;
@@ -40,11 +40,15 @@ export function AdminTable<T extends { id: string | number }>({
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
 
-    const filteredData = data.filter((item) => {
-        if (!searchTerm || !searchKey) return true;
-        const value = item[searchKey];
-        return typeof value === "string" ? value.toLowerCase().includes(searchTerm.toLowerCase()) : true;
+  const filteredData = data.filter((item) => {
+    if (!searchTerm || !searchKey) return true;
+
+    return searchKey.some((key) => {
+        const value = item[key];
+        return typeof value === "string" &&
+            value.toLowerCase().includes(searchTerm.toLowerCase());
     });
+});
 
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;

@@ -6,7 +6,8 @@ import { mockData } from "@/lib/mockData";
 import { AdminTable } from "@/components/admin/AdminTable";
 import { Badge } from "@/components/ui/badge";
 import { Instructor } from "@/types";
-import { InstructorFormModal, InstructorDeleteModal } from "@/components/dashboard/InstructorModals";
+import { InstructorFormModal } from "@/components/dashboard/InstructorModals/InstructorFormModal";
+import { InstructorDeleteModal } from "@/components/dashboard/InstructorModals/InstructorDeleteModal";
 
 export default function InstructorsManagementPage() {
     const [instructors, setInstructors] = useState<Instructor[]>([mockData.instructor] as Instructor[]);
