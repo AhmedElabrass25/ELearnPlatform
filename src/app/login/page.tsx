@@ -24,7 +24,7 @@ export default async function LoginPage() {
                         <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                             <BookOpen className="h-6 w-6" />
                         </div>
-                        <span className="font-bold text-2xl">أكاديمية محمد</span>
+                        <span className="font-bold text-2xl">أكاديمية البرهان</span>
                     </Link>
                     <h1 className="text-4xl font-bold leading-tight mb-6">
                         مرحباً بعودتك إلى منصتك التعليمية المفضلة

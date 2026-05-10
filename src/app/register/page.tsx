@@ -21,10 +21,10 @@ export default async function RegisterPage() {
                 <div className="relative z-10 space-y-8">
                     <BookOpen className="w-16 h-16 text-primary mb-4" />
                     <h1 className="text-3xl font-bold leading-tight">
-                        ابدأ رحلتك التعليمية الممتعة اليوم!
+                        ابدأ رحلتك نحو التميز في الرياضيات اليوم!
                     </h1>
                     <p className="text-lg text-muted-foreground leading-relaxed">
-                        انضم إلى منصة أكاديمية محمد لتطوير مهاراتك في اللغة العربية وتأمين أعلى الدرجات في الامتحانات بأفضل وسائل التقنية الحديثة.
+                        انضم إلى منصة أكاديمية البرهان لتطوير مهاراتك الرياضية وتأمين الدرجة النهائية في الامتحانات بأفضل وسائل التقنية الحديثة.
                     </p>
 
                     <div className="space-y-6 pt-8">

@@ -38,7 +38,7 @@ export function PathCard({ path }: { path: Path }) {
       <CardContent className="p-6 flex-grow">
         <p className="text-muted-foreground leading-relaxed text-sm text-right line-clamp-3">
           {path.description ||
-            "استكشف هذا المسار التعليمي المتميز المصمم لمساعدتك على التفوق في اللغة العربية بأسلوب حديث ومبسط."}
+            "استكشف هذا المسار التعليمي المتميز المصمم لمساعدتك على التفوق في الرياضيات بأسلوب حديث ومبسط."}
         </p>
       </CardContent>
 

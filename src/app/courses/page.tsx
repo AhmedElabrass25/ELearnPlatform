@@ -13,7 +13,7 @@ export default async function CoursesPage({
     let courses: Course[] = [];
     let hasError=false;
     let title = "تصفح الدورات";
-    let subtitle = "اكتشف دورات اللغة العربية المناسبة لمستواك وأهدافك";
+    let subtitle = "اكتشف دورات الرياضيات المناسبة لمستواك وأهدافك";
 
     try {
         if (trackId) {

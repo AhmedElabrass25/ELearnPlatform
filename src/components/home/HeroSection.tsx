@@ -11,7 +11,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ site, instructor }: HeroSectionProps) {
     return (
-        <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+        <section className="min-h-screen relative overflow-hidden bg-background py-24 lg:py-32">
             <div className="container relative z-10 px-4 md:px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-right space-y-8">
@@ -19,7 +19,7 @@ export function HeroSection({ site, instructor }: HeroSectionProps) {
                             {site.tagline}
                         </Badge>
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-                            تعلم اللغة العربية <br />
+                            تعلم الرياضيات  <br />
                             <span className="text-primary mt-2 inline-block">بسهولة وإتقان</span>
                         </h1>
                         <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
@@ -41,7 +41,7 @@ export function HeroSection({ site, instructor }: HeroSectionProps) {
                         </div>
                         <div className="absolute bottom-10 right-0 sm:-right-4 bg-background p-4 rounded-xl shadow-xl border border-border/30 flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center"><Star className="w-5 h-5 text-primary fill-primary" /></div>
-                            <div><p className="font-bold text-sm">أفضل معلم</p><p className="text-xs text-muted-foreground">لتبسيط النحو</p></div>
+                            <div><p className="font-bold text-sm">أفضل معلم</p><p className="text-xs text-muted-foreground">لتبسيط الرياضيات</p></div>
                         </div>
                     </div>
                 </div>

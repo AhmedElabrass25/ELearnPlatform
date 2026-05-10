@@ -8,10 +8,10 @@ export function Footer() {
                 <div className="md:col-span-1 space-y-4">
                     <Link href="/" className="flex items-center gap-2 text-primary">
                         <BookOpen className="h-8 w-8" />
-                        <span className="font-bold text-xl">أكاديمية البيان</span>
+                        <span className="font-bold text-xl">أكاديمية البرهان</span>
                     </Link>
                     <p className="text-muted-foreground text-sm leading-relaxed">
-                        منصة تعليمية رائدة تهدف إلى تيسير لغة القرآن وتوصيل مبادئ النحو والصرف والبلاغة بأكثر الطرق ابتكاراً وسهولة تحت إشراف أستاذ محمد.
+                        منصة تعليمية رائدة تهدف إلى تبسيط مفاهيم الرياضيات وتنمية مهارات التفكير المنطقي والحل الإبداعي للمسائل تحت إشراف أستاذ محمد.
                     </p>
                     <div className="flex gap-4 pt-2">
                         <Link href="#" className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
@@ -60,7 +60,7 @@ export function Footer() {
             </div>
 
             <div className="container text-center text-sm text-muted-foreground pt-8 border-t">
-                <p>&copy; {new Date().getFullYear()} أكاديمية محمد للغة العربية. جميع الحقوق محفوظة.</p>
+                <p>&copy; {new Date().getFullYear()} أكاديمية البرهان للرياضيات. جميع الحقوق محفوظة.</p>
             </div>
         </footer>
     );

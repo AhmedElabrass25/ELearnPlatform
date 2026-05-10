@@ -3,12 +3,10 @@ import { Sparkles } from "lucide-react";
 import { Path } from "@/types";
 import { Badge } from "../ui/badge";
 import { PathCard } from "../path/PathCard";
-
 interface LearningPathsProps {
     paths: Path[];
     hasError?: boolean;
 }
-
 
 export function LearningPaths({ paths, hasError }: LearningPathsProps) {
     return (

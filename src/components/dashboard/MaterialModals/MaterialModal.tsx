@@ -42,7 +42,7 @@ export function MaterialModal({
                         value={formData.title}
                         onChange={e => setFormData({ ...formData, title: e.target.value })}
                         required
-                        placeholder="مثال: ملف قوانين النحو الشامل"
+                        placeholder="مثال: ملف قوانين الجبر الشامل"
                         className="rounded-xl h-11"
                     />
                 </div>
