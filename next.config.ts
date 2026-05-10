@@ -26,10 +26,14 @@ const nextConfig: NextConfig = {
     ],
   },
    async rewrites() {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    if (!baseUrl) {
+      return [];
+    }
     return [
       {
         source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BASE_URL}/api/:path*`,
+        destination: `${baseUrl}/api/:path*`,
       },
     ];
   },

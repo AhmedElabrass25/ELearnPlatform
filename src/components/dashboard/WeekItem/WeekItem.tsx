@@ -24,6 +24,7 @@ export function WeekItem({
   const [weekContent, setweekContent] = useState<IWeekContent>({week:week,lessons:[],exams:[]});
   useEffect(() => {
     const fetchWeekData = async () => {
+      if (!week._id) return;
       const weekContent = await getWeekContent(week._id);
       setweekContent(weekContent || { week, lessons: [], exams: [] });
     };

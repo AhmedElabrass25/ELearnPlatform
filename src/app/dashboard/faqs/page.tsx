@@ -29,7 +29,7 @@ export default function FAQsManagementPage() {
 
     return (
         <div className="animate-in fade-in duration-500">
-            <AdminTable title="إدارة الأسئلة الشائعة" description="إضافة وتعديل الأسئلة والأجوبة (FAQ)." data={faqs} columns={columns} searchKey="question" searchPlaceholder="ابحث في الأسئلة..." onAdd={handleAdd} onEdit={handleEdit} onDelete={(f) => { setItemToDelete(f); setIsDeleteModalOpen(true); }} />
+            <AdminTable title="إدارة الأسئلة الشائعة" description="إضافة وتعديل الأسئلة والأجوبة (FAQ)." data={faqs} columns={columns} searchKey={["question"]} searchPlaceholder="ابحث في الأسئلة..." onAdd={handleAdd} onEdit={handleEdit} onDelete={(f) => { setItemToDelete(f); setIsDeleteModalOpen(true); }} />
             <FAQFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} editingItem={editingItem} formData={formData} setFormData={setFormData} onSubmit={handleSubmit} />
             <FAQDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} question={itemToDelete?.question || ""} onConfirm={() => { if (itemToDelete) setFaqs(faqs.filter(f => f.id !== itemToDelete.id)); setIsDeleteModalOpen(false); }} />
         </div>

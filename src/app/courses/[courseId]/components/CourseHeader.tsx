@@ -1,14 +1,15 @@
-import { Course } from "@/types";
+import { ICourse } from "../types";
 import { CourseHeaderMedia } from "./header/CourseHeaderMedia";
 import { CourseHeaderInfo } from "./header/CourseHeaderInfo";
 import { CourseHeaderStats } from "./header/CourseHeaderStats";
 import { CourseHeaderPricing } from "./header/CourseHeaderPricing";
 
 interface CourseHeaderProps {
-  course: Course;
+  course: ICourse | null;
 }
 
 export function CourseHeader({ course }: CourseHeaderProps) {
+  if (!course) return null;
   return (
     <section className="relative pt-10 pb-20 overflow-hidden bg-primary/5 border-b">
       {/* Decorative background elements */}

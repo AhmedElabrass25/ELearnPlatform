@@ -64,8 +64,8 @@ export function UserFormModal({
                 <div className="space-y-2">
                     <Label>المرحلة الدراسية</Label>
                     <Input
-                        value={formData.educationalLevel}
-                        onChange={e => setFormData({ ...formData, educationalLevel: e.target.value })}
+                        value={formData.educationLevel}
+                        onChange={e => setFormData({ ...formData, educationLevel: e.target.value })}
                         className="rounded-xl"
                     />
                 </div>

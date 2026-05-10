@@ -1,12 +1,13 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Course } from "../types";
+import { ICourse } from "../types";
 
 interface MobilePurchaseBarProps {
-    course: Course;
+    course: ICourse | null;
 }
 
 export function MobilePurchaseBar({ course }: MobilePurchaseBarProps) {
+    if (!course) return null;
     return (
         <div className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-lg border-t z-50 p-4 md:hidden">
             <div className="container flex items-center justify-between gap-4">

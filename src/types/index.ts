@@ -4,7 +4,7 @@ export interface Material {
     id: string;
     title: string;
     type: MaterialType;
-    content: string; // URL for PDF/Attachment, Markdown/Text for Note
+    content: string;
     createdAt: string;
     order: number;
 }
@@ -67,10 +67,16 @@ export interface Exam {
 }
 
 export interface Week {
+  id?: string;
   _id: string;
   title: string;
-  description: string;
+  description?: string;
+  course?: string;
+  order?: number;
   active?: boolean;
+  lessons?: Lesson[];
+  exams?: Exam[];
+  materials?: Material[];
   createdAt?: string;
   updatedAt?: string;
   __v?: number;
@@ -80,8 +86,14 @@ export interface Course {
     id: string;
     _id?: string;
     title: string;
+    subtitle?: string;
     description?: string ;
     price: number;
+    currency?: string;
+    level?: string;
+    type?: string;
+    topic?: string;
+    duration?: string;
     durationInWeeks?: number;
     pathId?: string;
     track?: {
@@ -92,7 +104,13 @@ export interface Course {
         id?: string;
     };
     coverImage?:string
+    image?: string;
+    coverImageUrl?: string;
+    isPopular?: boolean;
+    lessonsCount?: number;
+    examsCount?: number;
     isPublished?: boolean;
+    startDate?: string;
     active?: boolean;
     weeks?: Week[];
     createdAt?: string;
@@ -103,6 +121,7 @@ export interface Path {
     id: string;
     _id?: string;
     name: string;
+    title?: string;
     slug: string;
     description: string;
     coursesCount?: number;

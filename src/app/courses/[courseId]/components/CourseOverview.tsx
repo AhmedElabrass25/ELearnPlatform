@@ -1,9 +1,9 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
-import { Course } from "../types";
+import { ICourse } from "../types";
 
 interface CourseOverviewProps {
-    course: Course;
+    course: ICourse;
 }
 
 export function CourseOverview({ course }: CourseOverviewProps) {

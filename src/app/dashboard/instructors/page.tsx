@@ -32,7 +32,7 @@ export default function InstructorsManagementPage() {
 
     return (
         <div className="animate-in fade-in duration-500">
-            <AdminTable title="إدارة المعلمين" description="إدارة ملفات المعلمين والمحاضرين." data={instructors} columns={columns} searchKey="name" searchPlaceholder="ابحث باسم المعلم..." onAdd={handleAdd} onEdit={handleEdit} onDelete={(i) => { setInstructorToDelete(i); setIsDeleteModalOpen(true); }} />
+            <AdminTable title="إدارة المعلمين" description="إدارة ملفات المعلمين والمحاضرين." data={instructors} columns={columns} searchKey={["name"]} searchPlaceholder="ابحث باسم المعلم..." onAdd={handleAdd} onEdit={handleEdit} onDelete={(i) => { setInstructorToDelete(i); setIsDeleteModalOpen(true); }} />
             <InstructorFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} editingInstructor={editingInstructor} formData={formData} setFormData={setFormData} onSubmit={handleSubmit} />
             <InstructorDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} instructorName={instructorToDelete?.name || ""} onConfirm={() => { if (instructorToDelete) setInstructors(instructors.filter(i => i.id !== instructorToDelete.id)); setIsDeleteModalOpen(false); }} />
         </div>

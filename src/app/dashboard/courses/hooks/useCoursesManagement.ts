@@ -40,11 +40,15 @@ export function useCoursesManagement({ initialCourses }: UseCoursesManagementPro
         setEditingCourse(c); 
         setFormData({ 
             title: c.title, 
-            description: c.description , 
+            description: c.description || "", 
             price: String(c.price), 
-            durationInWeeks: String((c as any).durationInWeeks || "6"), 
-            isPublished: (c as any).isPublished ?? true,
-            active: (c as any).active ?? true,
+            type: c.type || "أونلاين",
+            topic: c.topic || "",
+            durationInWeeks: String(c.durationInWeeks || "6"), 
+            pathId: c.pathId || c.track?._id || c.track?.id || "",
+            image: (c as any).image || "",
+            isPublished: c.isPublished ?? true,
+            active: c.active ?? true,
             coverImage: null ,
         }); 
         setIsModalOpen(true); 

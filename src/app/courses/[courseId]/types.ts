@@ -29,10 +29,10 @@ export interface ICourse {
     description?: string;
     price: number;
     currency?: string;
-    level: string;
-    type: string;
+    level?: string;
+    type?: string;
     topic?: string;
-    duration: string;
+    duration?: string;
     durationInWeeks?: number;
     pathId?: string;
     track?: {
@@ -60,12 +60,12 @@ export interface ICourse {
 export interface IWeek {
   _id: string;
   title: string;
-  course: string;
-  order: number;
-  description: string;
-  active: boolean;
-  createdAt: string;
-  updatedAt: string;
+  course?: string;
+  order?: number;
+  description?: string;
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 // Lesson

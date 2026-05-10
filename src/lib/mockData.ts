@@ -1,5 +1,4 @@
 import { Course, Lesson, Path, Instructor, User, Settings, Testimonial, FAQ } from "@/types";
-import arabicInstructor from ""
 export const mockData: {
   site: { name: string; logo: string; tagline: string; description: string };
   instructor: Instructor;
@@ -36,8 +35,10 @@ export const mockData: {
       "id": "beginner-arabic",
       "slug": "المبتدئين",
       "title": "اللغة العربية للمبتدئين",
+      "name": "اللغة العربية للمبتدئين",
       "description": "من الصفر إلى مستوى متوسط – النحو الأساسي، المفردات، القراءة والكتابة",
       "image": "/images/path-beginner.jpg",
+      "coverImage": "/images/path-beginner.jpg",
       "coursesCount": 6,
       "lessonsCount": 85,
       "examsCount": 12,
@@ -47,8 +48,10 @@ export const mockData: {
       "id": "intermediate",
       "slug": "المتوسط",
       "title": "اللغة العربية المتوسطة",
+      "name": "اللغة العربية المتوسطة",
       "description": "تعميق النحو والصرف + البلاغة + التعبير الكتابي",
       "image": "/images/path-intermediate.jpg",
+      "coverImage": "/images/path-intermediate.jpg",
       "coursesCount": 5,
       "lessonsCount": 72,
       "examsCount": 10,
@@ -58,8 +61,10 @@ export const mockData: {
       "id": "advanced",
       "slug": "المتقدم",
       "title": "اللغة العربية المتقدمة",
+      "name": "اللغة العربية المتقدمة",
       "description": "البلاغة العالية، الأدب، النقد الأدبي، والإعداد للجامعة والمناصب",
       "image": "/images/path-advanced.jpg",
+      "coverImage": "/images/path-advanced.jpg",
       "coursesCount": 4,
       "lessonsCount": 65,
       "examsCount": 15,
@@ -69,8 +74,10 @@ export const mockData: {
       "id": "non-arabic-speakers",
       "slug": "ناطقين-بغيرها",
       "title": "اللغة العربية لغير الناطقين بها",
+      "name": "اللغة العربية لغير الناطقين بها",
       "description": "منهج خاص بالأجانب – فصحى + محادثة + ثقافة عربية",
       "image": "/images/path-non-arabic.jpg",
+      "coverImage": "/images/path-non-arabic.jpg",
       "coursesCount": 3,
       "lessonsCount": 55,
       "examsCount": 8,
@@ -97,7 +104,9 @@ export const mockData: {
       "weeks": [
         {
           "id": "w1",
+          "_id": "w1",
           "title": "الأسبوع الأول: مدخل إلى اللغة العربية",
+          "description": "مدخل إلى الحروف والنطق الصحيح",
           "order": 1,
           "lessons": [
             {
@@ -143,7 +152,9 @@ export const mockData: {
         },
         {
           "id": "w2",
+          "_id": "w2",
           "title": "الأسبوع الثاني: القواعد الأساسية",
+          "description": "دراسة النكرة والمعرفة والقواعد الأساسية",
           "order": 2,
           "lessons": [
             {
@@ -176,17 +187,27 @@ export const mockData: {
               "questions": [
                 {
                   "id": "q1",
+                  "questionText": "ما هو تعريف النكرة؟",
                   "text": "ما هو تعريف النكرة؟",
                   "type": "mcq",
-                  "options": ["اسم يدل على شيء معين", "اسم يدل على شيء غير معين", "فعل ماضي", "حرف جر"],
+                  "options": [
+                    { "text": "اسم يدل على شيء معين", "isCorrect": false },
+                    { "text": "اسم يدل على شيء غير معين", "isCorrect": true },
+                    { "text": "فعل ماضي", "isCorrect": false },
+                    { "text": "حرف جر", "isCorrect": false }
+                  ],
                   "correctAnswer": "اسم يدل على شيء غير معين",
+                  "mark": 5,
                   "score": 5
                 },
                 {
                   "id": "q2",
+                  "questionText": "كلمة 'الكتاب' هي معرفة.",
                   "text": "كلمة 'الكتاب' هي معرفة.",
                   "type": "true-false",
+                  "options": [],
                   "correctAnswer": true,
+                  "mark": 5,
                   "score": 5
                 }
               ]
@@ -532,7 +553,7 @@ export const mockData: {
       "phone": "+201001234567",
       "birthDate": "2005-03-15",
       "gender": "ذكر",
-      "educationalLevel": "ثانوية عامة",
+      "educationLevel": "ثانوية عامة",
       "governorate": "القاهرة",
       "enrolledCourses": ["jan-beginner-online", "feb-intermediate-center"],
       "progress": { "jan-beginner-online": 65, "feb-intermediate-center": 30 }
@@ -545,7 +566,7 @@ export const mockData: {
       "phone": "+201112345678",
       "birthDate": "2006-07-22",
       "gender": "أنثى",
-      "educationalLevel": "جامعي",
+      "educationLevel": "جامعي",
       "governorate": "الإسكندرية",
       "enrolledCourses": ["quranic-arabic"],
       "progress": { "quranic-arabic": 45 }

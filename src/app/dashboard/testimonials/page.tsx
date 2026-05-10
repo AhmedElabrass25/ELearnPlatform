@@ -32,7 +32,7 @@ export default function TestimonialsManagementPage() {
 
     return (
         <div className="animate-in fade-in duration-500">
-            <AdminTable title="إدارة الآراء والمراجعات" description="التحكم في التقييمات المعروضة على الصفحة الرئيسية." data={testimonials} columns={columns} searchKey="name" searchPlaceholder="ابحث باسم الطالب..." onAdd={handleAdd} onEdit={handleEdit} onDelete={(t) => { setItemToDelete(t); setIsDeleteModalOpen(true); }} />
+            <AdminTable title="إدارة الآراء والمراجعات" description="التحكم في التقييمات المعروضة على الصفحة الرئيسية." data={testimonials} columns={columns} searchKey={["name"]} searchPlaceholder="ابحث باسم الطالب..." onAdd={handleAdd} onEdit={handleEdit} onDelete={(t) => { setItemToDelete(t); setIsDeleteModalOpen(true); }} />
             <TestimonialFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} editingItem={editingItem} formData={formData} setFormData={setFormData} onSubmit={handleSubmit} />
             <TestimonialDeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} itemName={itemToDelete?.name || ""} onConfirm={() => { if (itemToDelete) setTestimonials(testimonials.filter(t => t.id !== itemToDelete.id)); setIsDeleteModalOpen(false); }} />
         </div>
