@@ -49,9 +49,9 @@ const RegisterForm = () => {
   const onSubmit = (data: RegisterInput) => {
     setSubmitError("");
     setSubmitSuccess("");
-    
     startTransition(async () => {
         const result = await registerAction(data);
+  console.log("action response",result);
         if (result.success) {
             setSubmitSuccess("تم إنشاء الحساب بنجاح! جاري إعادة التوجيه...");
             reset();

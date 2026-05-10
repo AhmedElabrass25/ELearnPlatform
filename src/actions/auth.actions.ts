@@ -21,24 +21,18 @@ export async function loginAction(data: ILoginForm): Promise<ActionResponse> {
         const response = await login(data);
         const token = response.token || response.data?.token;
         const userData = response.data?.user || response.data || response.user;
-
         if (!token) {
             return { success: false, error: "فشل الحصول على رمز الدخول" };
         }
-
         const role = response.role || userData?.role || "student";
         const cookieStore = await cookies();
-        
-        // Secure token cookie
-        cookieStore.set("token", token, {
+                cookieStore.set("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
             path: "/",
             maxAge: 60 * 60 * 24 * 7, // 7 days
         });
-
-        // Optional Role cookie for quick server-side checks
         cookieStore.set("userRole", role, {
             httpOnly: false, 
             secure: process.env.NODE_ENV === "production",
@@ -46,7 +40,6 @@ export async function loginAction(data: ILoginForm): Promise<ActionResponse> {
             path: "/",
             maxAge: 60 * 60 * 24 * 7,
         });
-        
         revalidatePath("/", "layout");
         return { success: true, data: userData };
     } catch (err: any) {
@@ -61,29 +54,25 @@ export async function loginAction(data: ILoginForm): Promise<ActionResponse> {
 export async function registerAction(data: IRegisterForm): Promise<ActionResponse> {
     try {
         const response = await register(data);
+        console.log(response);
         const token = response.token || response.data?.token;
-
         if (!token) {
             return { success: false, error: "فشل الحصول على رمز الدخول بعد التسجيل" };
         }
-
         const role = response.role || response.data?.role || "student";
         const cookieStore = await cookies();
-        
         cookieStore.set("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
             path: "/",
         });
-        
         cookieStore.set("userRole", role, {
             httpOnly: false,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
             path: "/",
         });
-
         revalidatePath("/", "layout");
         return { success: true };
     } catch (err: any) {

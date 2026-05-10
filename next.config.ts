@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "synclastic-albertine-unindulgently.ngrok-free.dev",
+        hostname: "al-barhan-paltform.up.railway.app",
         pathname: "/**",
       },
     ],
