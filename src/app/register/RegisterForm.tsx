@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Eye, EyeOff } from "lucide-react";
 import { registerAction } from "@/actions/auth.actions";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
@@ -22,6 +23,8 @@ const RegisterForm = () => {
   const [submitError, setSubmitError] = useState<string>("");
   const [submitSuccess, setSubmitSuccess] = useState<string>("");
   const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
 
   const {
@@ -72,6 +75,7 @@ const RegisterForm = () => {
                 الاسم الرباعي
               </Label>
               <Input
+              disabled={isPending}
                 id="fullName"
                 placeholder="مثل: أحمد محمد علي حسن"
                 {...register("fullName")}
@@ -91,6 +95,7 @@ const RegisterForm = () => {
             <Input
               id="phone"
               type="tel"
+              disabled={isPending}
               placeholder="01X XXXX XXXX"
               {...register("phone")}
               dir="ltr"
@@ -107,6 +112,7 @@ const RegisterForm = () => {
             <Input
               id="phone"
               type="tel"
+              disabled={isPending}
               placeholder="01X XXXX XXXX"
               {...register("parentPhone")}
               dir="ltr"
@@ -125,6 +131,7 @@ const RegisterForm = () => {
           <Input
             id="email"
             type="email"
+            disabled={isPending}
             placeholder="student@example.com"
             {...register("email")}
             dir="ltr"
@@ -140,14 +147,28 @@ const RegisterForm = () => {
             <Label htmlFor="password" className="font-bold">
               كلمة المرور
             </Label>
-            <Input
-              id="password"
-              type="password"
-              {...register("password")}
-              dir="ltr"
-              className="h-11 text-left bg-muted/30 focus:bg-background"
-              placeholder="••••••••"
-            />
+            <div className="relative">
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                {...register("password")}
+                dir="ltr"
+                disabled={isPending}
+                className="h-11 text-left bg-muted/30 focus:bg-background pr-10"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
             {errors.password && (
               <p className="text-sm text-destructive">
                 {errors.password.message}
@@ -158,14 +179,28 @@ const RegisterForm = () => {
             <Label htmlFor="confirmPassword" className="font-bold">
               تأكيد كلمة المرور
             </Label>
-            <Input
-              id="passwordConfirm"
-              type="password"
-              {...register("passwordConfirm")}
-              dir="ltr"
-              className="h-11 text-left bg-muted/30 focus:bg-background"
-              placeholder="••••••••"
-            />
+            <div className="relative">
+              <Input
+                id="passwordConfirm"
+                disabled={isPending}
+                type={showConfirmPassword ? "text" : "password"}
+                {...register("passwordConfirm")}
+                dir="ltr"
+                className="h-11 text-left bg-muted/30 focus:bg-background pr-10"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>
             {errors.passwordConfirm && (
               <p className="text-sm text-destructive">
                 {errors.passwordConfirm.message}
@@ -183,7 +218,7 @@ const RegisterForm = () => {
               name="educationLevel"
               control={control}
               render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select disabled={isPending} onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="h-11 bg-muted/30" dir="rtl">
                     <SelectValue placeholder="اختر المرحلة" />
                       </SelectTrigger>
@@ -209,7 +244,7 @@ const RegisterForm = () => {
               name="governorate"
               control={control}
               render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select disabled={isPending} onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="h-11 bg-muted/30" dir="rtl">
                     <SelectValue placeholder="اختر المحافظة" />
                   </SelectTrigger>
@@ -235,7 +270,7 @@ const RegisterForm = () => {
               name="gender"
               control={control}
               render={({ field }) => (
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select disabled={isPending} onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="النوع" />
                   </SelectTrigger>

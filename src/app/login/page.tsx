@@ -48,17 +48,7 @@ export default async function LoginPage() {
                         </li>
                     </ul>
                 </div>
-
-                <div className="relative z-10 mt-auto pt-12">
-                    <div className="p-6 bg-card rounded-2xl shadow-sm border border-border/50 max-w-sm">
-                        <p className="italic text-muted-foreground leading-relaxed">
-                            &quot;لقد أحببت طريقة عرض الدروس والواجبات المرتبة، ساعدني ذلك كثيراً في تنظيم وقتي.&quot;
-                        </p>
-                        <div className="mt-4 font-bold text-sm">- أحد طلابنا المتميزين</div>
-                    </div>
-                </div>
             </div>
-
             {/* Login Form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12">
                 <div className="w-full max-w-md space-y-8">

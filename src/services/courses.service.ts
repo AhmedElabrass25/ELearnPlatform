@@ -6,7 +6,7 @@ import { Course } from "@/types";
  */
 export async function getAllCourses(): Promise<Course[]> {
   const response = await apiFetch<any>("/api/v1/courses");
-  console.log(response);
+  // console.log(response);
   return response?.data;  
 }
 

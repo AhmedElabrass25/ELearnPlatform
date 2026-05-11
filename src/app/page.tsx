@@ -4,6 +4,7 @@ import { LearningPaths } from "@/components/home/LearningPaths";
 import { FAQSection } from "@/components/home/FAQSection";
 import { FAQ, Path } from "@/types";
 import { getTracks } from "@/services/tracks.service";
+import { Footer } from "@/components/Footer";
 
 export default async function Home() {
     let paths: Path[] = [];
@@ -20,6 +21,7 @@ export default async function Home() {
             <HeroSection site={mockData.site} instructor={mockData.instructor} />
             <LearningPaths paths={paths} hasError={hasError} />
             <FAQSection faqs={faqs} />
+            <Footer />
         </div>
     );
 }

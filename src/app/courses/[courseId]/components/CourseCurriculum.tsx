@@ -10,14 +10,13 @@ interface CourseCurriculumProps {
 }
 
 export function CourseCurriculum({ weeksWithLessons, courseId }: CourseCurriculumProps) {
-    console.log(weeksWithLessons)
     return (
         <div className="space-y-6 text-right">
             <div className="flex items-center justify-between mb-4">
+                <h2 className="text-3xl font-bold">منهج الدورة الدراسي</h2>
                 <div className="text-sm text-muted-foreground">
                     {weeksWithLessons.length} أسابيع تعليمة
                 </div>
-                <h2 className="text-3xl font-bold">منهج الدورة الدراسي</h2>
             </div>
 
             {weeksWithLessons.length > 0 ? (

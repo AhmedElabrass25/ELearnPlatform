@@ -54,29 +54,6 @@ export function CourseHeaderPricing({ price }: CourseHeaderPricingProps) {
         >
           اشتراك الآن في الدورة
         </Button>
-        <Button
-          variant="outline"
-          size="lg"
-          className="h-14 px-8 text-lg font-bold rounded-2xl border-primary/20 text-primary hover:bg-primary/5"
-        >
-          تجربة مجانية
-        </Button>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-14 w-14 rounded-2xl border-primary/20 text-primary"
-          >
-            <Heart className="w-6 h-6" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-14 w-14 rounded-2xl border-primary/20 text-primary"
-          >
-            <Share2 className="w-6 h-6" />
-          </Button>
-        </div>
       </div>
     </div>
   );

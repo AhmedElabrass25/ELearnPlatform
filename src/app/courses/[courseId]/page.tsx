@@ -21,6 +21,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   let weeksWithLessons: IWeekDetailsData[] = [];
   try {
     const courseData = await getCourseById(courseId);
+    console.log(courseData)
     course = courseData;
     const weeks: IWeek[] = await getCourseWeeks(courseId);
     // Fetch content for each week in parallel

@@ -18,9 +18,8 @@ export const registerSchema = z
 // make password stronger by requiring at least one uppercase letter, one lowercase letter, one number, and one special character
     password: z
       .string()
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "كلمة المرور لازم تحتوي على حرف كبير وحرف صغير ورقم وحرف خاص")
-      .min(8, "كلمة المرور لازم تكون 8 حروف على الأقل"),
-
+      .min(8, "كلمة المرور لازم تكون 8 حروف على الأقل")
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "(ex. pasSword@123)كلمة المرور لازم تحتوي على حرف كبير وحرف صغير ورقم وحرف خاص"),
     passwordConfirm: z
       .string(),
 

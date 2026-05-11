@@ -16,7 +16,6 @@ export function middleware(request: NextRequest) {
                            request.nextUrl.pathname.startsWith('/paths');
 
   if (isProtectedRoute && !token) {
-    // واديه لصفحة تسجيل الدخول
     return NextResponse.redirect(new URL('/login', request.url));
   }
 

@@ -10,7 +10,7 @@ export default async function PathsPage() {
   } catch (error) {
     hasError = true;
   }
-
+console.log(paths);
   return (
     <div className="container py-12 px-4 md:px-6">
       <div className="max-w-2xl mx-auto text-center mb-16">

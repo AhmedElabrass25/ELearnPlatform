@@ -12,13 +12,13 @@ interface CourseListProps {
 
 export function CourseList({ initialCourses }: CourseListProps) {
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8">
             {/* Course Grid */}
             <div className="lg:col-span-3">
                 <div className="mb-6 flex justify-between items-center text-sm text-muted-foreground">
                     <span>تم العثور على <strong className="text-foreground">{initialCourses?.length}</strong> دورة</span>
                 </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {initialCourses?.map((course) => (
                             <Card key={course.id || course._id} className="pt-0 flex flex-col overflow-hidden border-border/50 hover:shadow-lg transition-all group bg-card">
                                 <div className="aspect-video bg-muted relative overflow-hidden">

@@ -3,12 +3,12 @@ import { Calendar } from "lucide-react";
 
 interface CourseHeaderInfoProps {
   trackName?: string;
-  updatedAt?: string;
+  createdAt?: string;
   title: string;
   description?: string;
 }
 
-export function CourseHeaderInfo({ trackName, updatedAt, title, description }: CourseHeaderInfoProps) {
+export function CourseHeaderInfo({ trackName, createdAt, title, description }: CourseHeaderInfoProps) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap justify-start gap-2 items-center">
@@ -19,8 +19,8 @@ export function CourseHeaderInfo({ trackName, updatedAt, title, description }: C
           {trackName || "مسار عام"}
         </Badge>
         <span className="text-muted-foreground text-sm flex items-center gap-1">
-          تم التحديث في{" "}
-          {new Date(updatedAt || Date.now()).toLocaleDateString("ar-EG")}
+            تاريخ الإضافة: {" "}
+          {new Date(createdAt || '').toDateString()}
           <Calendar className="w-4 h-4 ml-1" />
         </span>
       </div>

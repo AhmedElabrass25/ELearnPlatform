@@ -25,7 +25,7 @@ export function CourseHeader({ course }: CourseHeaderProps) {
           <div className="flex-1 space-y-8 text-right order-2 md:order-1">
             <CourseHeaderInfo 
               trackName={course.track?.name} 
-              updatedAt={course.updatedAt} 
+              createdAt={course.createdAt} 
               title={course.title} 
               description={course.description} 
             />
