@@ -11,6 +11,7 @@ import {
   ClipboardCheck,
   Unlock,
   Lock,
+  FileDown,
 } from "lucide-react";
 import { IWeekDetailsData } from "../types";
 import { getExamQuestions } from "@/services/questions.service";
@@ -20,11 +21,7 @@ interface WeekSectionProps {
   idx: number;
   courseId: string;
 }
-// get questions count
-// const getAllQuestionsCount = async (examId: string) => {
-//   const res = await getExamQuestions(examId);
-//   return res.length;
-// };
+
 
 export function WeekSection({ week, idx, courseId }: WeekSectionProps) {
   function formatDateTime(dateString: string) {
@@ -64,25 +61,54 @@ export function WeekSection({ week, idx, courseId }: WeekSectionProps) {
       <AccordionContent className="pb-6 pt-2">
         <div className="space-y-3 border-t pt-5">
           {/* Lessons */}
-          {week.lessons?.map((lesson, lIdx) => (
-            <Link
-              key={lesson._id}
-              href={`/lessons/${courseId}/${lesson.id || lesson._id}`}
-              className="p-4 hover:bg-muted/50 rounded-xl transition-colors flex items-center gap-4 group border border-transparent hover:border-border cursor-pointer block"
-            >
-              <PlayCircle className="w-5 h-5 text-primary opacity-60 group-hover:opacity-100" />
-              <div className="flex-1 text-right">
-                <h4 className="font-bold group-hover:text-primary transition-colors">
-                  {lesson.title}
-                </h4>
-              </div>
-              {lesson.isFree === true ? (
-                <Unlock className="w-4 h-4 text-green-500" />
-              ) : (
-                <Lock className="w-4 h-4 text-muted-foreground/30" />
-              )}
-            </Link>
-          ))}
+          {week.lessons?.map((lesson, lIdx) => {
+            const isPdf = lesson.type === "pdf";
+            const pdfUrl = lesson.fullContentUrl || lesson.contentUrl;
+
+            if (isPdf) {
+              return (
+                <a
+                  key={lesson._id}
+                  href={pdfUrl}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 hover:bg-amber-50 dark:hover:bg-amber-950/20 rounded-xl transition-colors flex items-center gap-4 group border border-transparent hover:border-amber-200 dark:hover:border-amber-800 cursor-pointer block"
+                >
+                  <FileDown className="w-5 h-5 text-amber-500 opacity-80 group-hover:opacity-100" />
+                  <div className="flex-1 text-right">
+                    <h4 className="font-bold group-hover:text-amber-600 transition-colors">
+                      {lesson.title}
+                    </h4>
+                    <p className="text-xs text-muted-foreground mt-0.5">PDF • تحميل الملف</p>
+                  </div>
+                  <span className="text-xs font-semibold text-amber-600 bg-amber-100 dark:bg-amber-900/40 px-2 py-1 rounded-lg">
+                    تحميل
+                  </span>
+                </a>
+              );
+            }
+
+            return (
+              <Link
+                key={lesson._id}
+                href={`/lessons/${courseId}/${lesson.id || lesson._id}`}
+                className="p-4 hover:bg-muted/50 rounded-xl transition-colors flex items-center gap-4 group border border-transparent hover:border-border cursor-pointer block"
+              >
+                <PlayCircle className="w-5 h-5 text-primary opacity-60 group-hover:opacity-100" />
+                <div className="flex-1 text-right">
+                  <h4 className="font-bold group-hover:text-primary transition-colors">
+                    {lesson.title}
+                  </h4>
+                </div>
+                {lesson.isFree === true ? (
+                  <Unlock className="w-4 h-4 text-green-500" />
+                ) : (
+                  <Lock className="w-4 h-4 text-muted-foreground/30" />
+                )}
+              </Link>
+            );
+          })}
 
           {week.exams?.map((exam, eIdx) => (
             <Link
