@@ -1,5 +1,4 @@
 import { ICourse } from "../types";
-import { CourseHeaderMedia } from "./header/CourseHeaderMedia";
 import { CourseHeaderInfo } from "./header/CourseHeaderInfo";
 import { CourseHeaderStats } from "./header/CourseHeaderStats";
 import { CourseHeaderPricing } from "./header/CourseHeaderPricing";
@@ -18,10 +17,6 @@ export function CourseHeader({ course }: CourseHeaderProps) {
 
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col md:flex-row gap-12 items-start">
-          {/* Left Side: Media */}
-          <CourseHeaderMedia coverImage={course.coverImage} title={course.title} />
-
-          {/* Right Side: Content */}
           <div className="flex-1 space-y-8 text-right order-2 md:order-1">
             <CourseHeaderInfo 
               trackName={course.track?.name} 
@@ -29,9 +24,7 @@ export function CourseHeader({ course }: CourseHeaderProps) {
               title={course.title} 
               description={course.description} 
             />
-            
             <CourseHeaderStats durationInWeeks={course.durationInWeeks} />
-            
             <CourseHeaderPricing price={course.price} />
           </div>
         </div>
