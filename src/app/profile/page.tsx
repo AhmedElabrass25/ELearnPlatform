@@ -4,7 +4,7 @@ import { getMe } from "@/services/auth.service";
 import { ProfileHeader } from "@/components/ProfileHeader";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { ProfilePasswordChange } from "@/components/profile/ProfilePasswordChange";
-import { ContinueLearning } from "@/components/profile/ContinueLearning";
+// import { ContinueLearning } from "@/components/profile/ContinueLearning";
 
 export default async function ProfilePage() {
   
@@ -37,9 +37,9 @@ export default async function ProfilePage() {
                     <ProfileForm user={user} />
                     <ProfilePasswordChange />
                 </div>
-                <div className="space-y-6">
+                {/* <div className="space-y-6">
                     <ContinueLearning enrolledCourseIds={user.enrolledCourses || []} progress={(user.progress as any) || {}} />
-                </div>
+                </div> */}
             </div>
         </div>
     );
