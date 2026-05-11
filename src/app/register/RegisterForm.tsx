@@ -61,6 +61,7 @@ const RegisterForm = () => {
             router.push("/");
             router.refresh();
         } else {
+          
             setSubmitError(result.error || "حدث خطأ أثناء إنشاء الحساب");
         }
     });
