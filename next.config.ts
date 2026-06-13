@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
         hostname: "al-barhan-paltform.up.railway.app",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "*.ngrok-free.app",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.ngrok-free.dev",
+        pathname: "/**",
+      },
     ],
   },
    async rewrites() {
