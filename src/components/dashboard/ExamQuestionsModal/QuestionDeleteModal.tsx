@@ -22,7 +22,7 @@ export function QuestionDeleteModal({ isOpen, onClose, examId, question, onDelet
         if (!question) return;
         setDeleting(true);
         try {
-            const qId = question.id || (question as any)._id; // Fallback mapping applied
+            const qId = (question as any)._id || question.id;
             await deleteQuestion(examId, qId as string);
             onDeleted(qId as string);
             toast.success("تم حذف السؤال بنجاح");

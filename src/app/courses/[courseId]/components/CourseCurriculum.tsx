@@ -7,9 +7,10 @@ import { WeekSection } from "./WeekSection";
 interface CourseCurriculumProps {
     weeksWithLessons: IWeekDetailsData[];
     courseId: string;
+    token?: string;
 }
 
-export function CourseCurriculum({ weeksWithLessons, courseId }: CourseCurriculumProps) {
+export function CourseCurriculum({ weeksWithLessons, courseId, token }: CourseCurriculumProps) {
     return (
         <div className="space-y-6 text-right">
             <div className="flex items-center justify-between mb-4">
@@ -27,6 +28,7 @@ export function CourseCurriculum({ weeksWithLessons, courseId }: CourseCurriculu
                             week={week} 
                             idx={idx} 
                             courseId={courseId} 
+                            token={token}
                         />
                     ))}
                 </Accordion>

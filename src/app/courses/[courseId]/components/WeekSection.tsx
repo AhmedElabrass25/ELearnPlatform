@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import {
@@ -13,17 +15,26 @@ import {
   Lock,
   FileDown,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { IWeekDetailsData } from "../types";
-import { getExamQuestions } from "@/services/questions.service";
 
 interface WeekSectionProps {
   week: IWeekDetailsData;
   idx: number;
   courseId: string;
+  token?: string;
 }
 
 
-export function WeekSection({ week, idx, courseId }: WeekSectionProps) {
+export function WeekSection({ week, idx, courseId, token }: WeekSectionProps) {
+  const router = useRouter();
+
+  const handleProtectedClick = (e: React.MouseEvent, href: string) => {
+    if (!token) {
+      e.preventDefault();
+      router.push("/login");
+    }
+  };
   function formatDateTime(dateString: string) {
     const date = new Date(dateString);
 
@@ -64,6 +75,7 @@ export function WeekSection({ week, idx, courseId }: WeekSectionProps) {
           {week.lessons?.map((lesson, lIdx) => {
             const isPdf = lesson.type === "pdf";
             const pdfUrl = lesson.fullContentUrl || lesson.contentUrl;
+            const lessonHref = `/lessons/${courseId}/${lesson.id || lesson._id}`;
 
             if (isPdf) {
               return (
@@ -73,6 +85,7 @@ export function WeekSection({ week, idx, courseId }: WeekSectionProps) {
                   download
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={(e) => handleProtectedClick(e, pdfUrl)}
                   className="p-4 hover:bg-amber-50 dark:hover:bg-amber-950/20 rounded-xl transition-colors flex items-center gap-4 group border border-transparent hover:border-amber-200 dark:hover:border-amber-800 cursor-pointer block"
                 >
                   <FileDown className="w-5 h-5 text-amber-500 opacity-80 group-hover:opacity-100" />
@@ -92,7 +105,8 @@ export function WeekSection({ week, idx, courseId }: WeekSectionProps) {
             return (
               <Link
                 key={lesson._id}
-                href={`/lessons/${courseId}/${lesson.id || lesson._id}`}
+                href={lessonHref}
+                onClick={(e) => handleProtectedClick(e, lessonHref)}
                 className="p-4 hover:bg-muted/50 rounded-xl transition-colors flex items-center gap-4 group border border-transparent hover:border-border cursor-pointer block"
               >
                 <PlayCircle className="w-5 h-5 text-primary opacity-60 group-hover:opacity-100" />
@@ -110,49 +124,53 @@ export function WeekSection({ week, idx, courseId }: WeekSectionProps) {
             );
           })}
 
-          {week.exams?.map((exam, eIdx) => (
-            <Link
-              href={`/courses/${courseId}/exam/${exam._id}`}
-              key={exam._id || eIdx}
-              className="p-4 bg-primary/5 hover:bg-primary/10 rounded-xl transition-colors flex items-center gap-4 border border-primary/10 group cursor-pointer block"
-            >
-              <ClipboardCheck className="w-5 h-5 text-primary" />
+          {week.exams?.map((exam, eIdx) => {
+            const examHref = `/courses/${courseId}/exam/${exam._id}`;
+            return (
+              <Link
+                href={examHref}
+                key={exam._id || eIdx}
+                onClick={(e) => handleProtectedClick(e, examHref)}
+                className="p-4 bg-primary/5 hover:bg-primary/10 rounded-xl transition-colors flex items-center gap-4 border border-primary/10 group cursor-pointer block"
+              >
+                <ClipboardCheck className="w-5 h-5 text-primary" />
 
-              <div className="flex-1 text-right">
-                <h4 className="font-bold text-primary">{exam.title}</h4>
-                {/* <p className="text-xs text-primary/70">
-                  {getAllQuestionsCount(exam._id)} سؤال
-                </p> */}
-                <div className="flex flex-wrap items-center gap-3 text-xs text-primary/80 bg-muted/50 px-3 py-2 rounded-lg">
-                  {/* Duration */}
-                  <div className="flex items-center gap-1">
-                    <span>⏱</span>
-                    <span>{exam.duration} دقيقة</span>
-                  </div>
+                <div className="flex-1 text-right">
+                  <h4 className="font-bold text-primary">{exam.title}</h4>
+                  {/* <p className="text-xs text-primary/70">
+                    {getAllQuestionsCount(exam._id)} سؤال
+                  </p> */}
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-primary/80 bg-muted/50 px-3 py-2 rounded-lg">
+                    {/* Duration */}
+                    <div className="flex items-center gap-1">
+                      <span>⏱</span>
+                      <span>{exam.duration} دقيقة</span>
+                    </div>
 
-                  {/* Date */}
-                  <div className="flex items-center gap-1">
-                    <span>📅</span>
-                    <span>
-                      {formatDateTime(exam.availableFrom).date} (
-                      {formatDateTime(exam.availableFrom).time}) -{" "}
-                      {formatDateTime(exam.availableUntil).date} (
-                      {formatDateTime(exam.availableUntil).time})
-                    </span>
-                  </div>
+                    {/* Date */}
+                    <div className="flex items-center gap-1">
+                      <span>📅</span>
+                      <span>
+                        {formatDateTime(exam.availableFrom).date} (
+                        {formatDateTime(exam.availableFrom).time}) -{" "}
+                        {formatDateTime(exam.availableUntil).date} (
+                        {formatDateTime(exam.availableUntil).time})
+                      </span>
+                    </div>
 
-                  {/* Marks */}
-                  <div className="flex items-center gap-1">
-                    <span>⭐</span>
-                    <span>{exam.totalMarks} درجة</span>
+                    {/* Marks */}
+                    <div className="flex items-center gap-1">
+                      <span>⭐</span>
+                      <span>{exam.totalMarks} درجة</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <Badge className="bg-primary text-white text-[10px] group-hover:scale-105 transition-transform">
-                فتح الاختبار
-              </Badge>
-            </Link>
-          ))}
+                <Badge className="bg-primary text-white text-[10px] group-hover:scale-105 transition-transform">
+                  فتح الاختبار
+                </Badge>
+              </Link>
+            );
+          })}
         </div>
       </AccordionContent>
     </AccordionItem>

@@ -1,15 +1,26 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getMe } from "@/services/auth.service";
+import { getMyAllAttempts } from "@/services/exams.service";
 import { ProfileHeader } from "@/components/ProfileHeader";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { ProfilePasswordChange } from "@/components/profile/ProfilePasswordChange";
+import { ProfileExamResults } from "@/components/profile/ProfileExamResults";
 
 export default async function ProfilePage() {
   
     let user = null;
+    let attempts = [];
+    
     try {
-        user = await getMe();
+        const [userData, attemptsData] = await Promise.all([
+            getMe(),
+            getMyAllAttempts().catch(() => [])
+        ]);
+        
+        user = userData;
+        attempts = attemptsData || [];
+        
         if (!user) {
             redirect("/login");
         }
@@ -31,12 +42,14 @@ export default async function ProfilePage() {
     return (
         <div className="container py-10 pt-24 min-h-screen">
             <ProfileHeader user={user} />
-            <div className="grid grid-cols-1 gap-8">
-                <div className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+                <div className="lg:col-span-2 space-y-8">
                     <ProfileForm user={user} />
                     <ProfilePasswordChange />
                 </div>
-                
+                <div className="lg:col-span-1">
+                    <ProfileExamResults attempts={attempts} />
+                </div>
             </div>
         </div>
     );

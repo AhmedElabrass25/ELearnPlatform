@@ -105,7 +105,7 @@ const LoginForm = () => {
               </p>
             )}
             <Link
-              href="#"
+              href="/forgot-password"
               className="text-sm font-medium text-primary hover:underline self-end pt-1"
             >
               نسيت كلمة المرور؟

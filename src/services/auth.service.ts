@@ -11,7 +11,6 @@ export async function register(data: IRegisterForm) {
     method: "POST",
     body: JSON.stringify(data),
   });
-  console.log("response",response);
   return response;
 }
 
@@ -64,4 +63,37 @@ export async function updatePassword(data: { currentPassword: string; newPasswor
     body: JSON.stringify(data),
   });
   return response?.data;
+}
+
+/**
+ * Send password reset OTP to email
+ */
+export async function forgotPassword(data: { email: string }) {
+  const response = await apiFetch("/api/v1/auth/forgot-password", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  return response;
+}
+
+/**
+ * Verify the OTP reset code
+ */
+export async function verifyResetCode(data: { resetCode: string }) {
+  const response = await apiFetch("/api/v1/auth/verify-reset-code", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  return response;
+}
+
+/**
+ * Reset the password with email + new passwords
+ */
+export async function resetPassword(data: { email: string; newPassword: string; newPasswordConfirm: string }) {
+  const response = await apiFetch("/api/v1/auth/reset-password", {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+  return response;
 }

@@ -3,15 +3,17 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, ChevronRight, ChevronLeft, Timer, Loader2 } from "lucide-react";
+import { CheckCircle2, ChevronRight, ChevronLeft, Timer, Loader2, AlertTriangle } from "lucide-react";
+import { Exam, Question } from "@/types";
 
 interface ExamInProgressProps {
-    exam: any;
-    questions: any[];
+    exam: Exam;
+    questions: Question[];
     currentQuestionIndex: number;
     answers: Record<string, number>;
     timeLeft: number;
     isLoading: boolean;
+    error?: string | null;
     onAnswerSelect: (qId: string, idx: number) => void;
     onPrevQuestion: () => void;
     onNextQuestion: () => void;
@@ -26,6 +28,7 @@ export function ExamInProgress({
     answers,
     timeLeft,
     isLoading,
+    error,
     onAnswerSelect,
     onPrevQuestion,
     onNextQuestion,
@@ -49,7 +52,7 @@ export function ExamInProgress({
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
                 <div>
                     <h1 className="text-2xl font-bold flex items-center gap-2 mb-2">
-                        {exam.title || exam.name}
+                        {exam.title}
                     </h1>
                     <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
                         سؤال {currentQuestionIndex + 1} من {questions.length}
@@ -63,6 +66,13 @@ export function ExamInProgress({
             </div>
 
             <Progress value={progress} className="h-2 mb-8" />
+
+            {error && (
+                <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
+                    <AlertTriangle className="w-5 h-5 shrink-0" />
+                    <p className="text-sm font-bold">{error}</p>
+                </div>
+            )}
 
             {/* Question Card */}
             <AnimatePresence mode="wait">
@@ -83,44 +93,50 @@ export function ExamInProgress({
                             <div className="space-y-3 pt-4">
                                 {currentQuestion.type === 'true-false' ? (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        {['صح', 'خطأ'].map((label, idx) => (
-                                            <button
-                                                key={idx}
-                                                onClick={() => onAnswerSelect(currentQuestion.id || currentQuestion._id, idx)}
-                                                className={`p-6 text-xl font-bold rounded-2xl border-2 transition-all flex items-center justify-center gap-4 ${
-                                                    answers[currentQuestion.id || currentQuestion._id] === idx
-                                                        ? 'bg-primary/10 border-primary text-primary shadow-inner'
-                                                        : 'bg-card border-border hover:border-primary/50 text-muted-foreground'
-                                                }`}
-                                            >
-                                                {label}
-                                                {answers[currentQuestion.id || currentQuestion._id] === idx && <CheckCircle2 className="w-6 h-6" />}
-                                            </button>
-                                        ))}
+                                        {['صح', 'خطأ'].map((label, idx) => {
+                                            const qId = (currentQuestion as any)._id || currentQuestion.id;
+                                            return (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => onAnswerSelect(qId, idx)}
+                                                    className={`p-6 text-xl font-bold rounded-2xl border-2 transition-all flex items-center justify-center gap-4 ${
+                                                        answers[qId] === idx
+                                                            ? 'bg-primary/10 border-primary text-primary shadow-inner'
+                                                            : 'bg-card border-border hover:border-primary/50 text-muted-foreground'
+                                                    }`}
+                                                >
+                                                    {label}
+                                                    {answers[qId] === idx && <CheckCircle2 className="w-6 h-6" />}
+                                                </button>
+                                            );
+                                        })}
                                     </div>
                                 ) : (
                                     <div className="space-y-3">
-                                        {(currentQuestion.options || []).map((option: any, idx: number) => (
-                                            <button
-                                                key={idx}
-                                                onClick={() => onAnswerSelect(currentQuestion.id || currentQuestion._id, idx)}
-                                                className={`w-full p-4 md:p-5 text-right rounded-xl border-2 transition-all flex items-center gap-4 group ${
-                                                    answers[currentQuestion.id || currentQuestion._id] === idx
-                                                        ? 'bg-primary/10 border-primary text-primary shadow-inner'
-                                                        : 'bg-card border-border hover:border-primary/50 text-muted-foreground'
-                                                }`}
-                                            >
-                                                <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 font-bold transition-colors shrink-0 ${
-                                                    answers[currentQuestion.id || currentQuestion._id] === idx
-                                                        ? 'bg-primary border-primary text-white'
-                                                        : 'border-border group-hover:border-primary/50 group-hover:text-primary'
-                                                }`}>
-                                                    {String.fromCharCode(65 + idx)}
-                                                </div>
-                                                <span className="text-lg font-medium flex-1">{typeof option === 'string' ? option : option.text}</span>
-                                                {answers[currentQuestion.id || currentQuestion._id] === idx && <CheckCircle2 className="w-5 h-5 shrink-0" />}
-                                            </button>
-                                        ))}
+                                        {(currentQuestion.options || []).map((option, idx) => {
+                                            const qId = (currentQuestion as any)._id || currentQuestion.id;
+                                            return (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => onAnswerSelect(qId, idx)}
+                                                    className={`w-full p-4 md:p-5 text-right rounded-xl border-2 transition-all flex items-center gap-4 group ${
+                                                        answers[qId] === idx
+                                                            ? 'bg-primary/10 border-primary text-primary shadow-inner'
+                                                            : 'bg-card border-border hover:border-primary/50 text-muted-foreground'
+                                                    }`}
+                                                >
+                                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center border-2 font-bold transition-colors shrink-0 ${
+                                                        answers[qId] === idx
+                                                            ? 'bg-primary border-primary text-white'
+                                                            : 'border-border group-hover:border-primary/50 group-hover:text-primary'
+                                                    }`}>
+                                                        {String.fromCharCode(65 + idx)}
+                                                    </div>
+                                                    <span className="text-lg font-medium flex-1">{typeof option === 'string' ? option : option.text}</span>
+                                                    {answers[qId] === idx && <CheckCircle2 className="w-5 h-5 shrink-0" />}
+                                                </button>
+                                            );
+                                        })}
                                     </div>
                                 )}
                             </div>
@@ -148,7 +164,7 @@ export function ExamInProgress({
                                 <Button 
                                     onClick={onNextQuestion} 
                                     className="h-11 px-8 font-bold text-white"
-                                    disabled={answers[currentQuestion.id || currentQuestion._id] === undefined || isLoading}
+                                    disabled={answers[(currentQuestion as any)._id || currentQuestion.id] === undefined || isLoading}
                                 >
                                     التالي
                                     <ChevronLeft className="w-5 h-5 mr-2" />
@@ -161,21 +177,24 @@ export function ExamInProgress({
 
             {/* Navigation Summary */}
             <div className="mt-8 flex flex-wrap gap-2 justify-center">
-                {questions.map((q, idx) => (
-                    <button
-                        key={q.id || q._id || idx}
-                        onClick={() => onNavigateQuestion(idx)}
-                        className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center font-bold transition-all ${
-                            currentQuestionIndex === idx
-                                ? 'bg-primary border-primary text-white'
-                                : answers[q.id || q._id] !== undefined
-                                ? 'bg-primary/10 border-primary/30 text-primary'
-                                : 'bg-card border-border text-muted-foreground'
-                        }`}
-                    >
-                        {idx + 1}
-                    </button>
-                ))}
+                {questions.map((q, idx) => {
+                    const qId = (q as any)._id || q.id;
+                    return (
+                        <button
+                            key={qId || idx}
+                            onClick={() => onNavigateQuestion(idx)}
+                            className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center font-bold transition-all ${
+                                currentQuestionIndex === idx
+                                    ? 'bg-primary border-primary text-white'
+                                    : answers[qId] !== undefined
+                                    ? 'bg-primary/10 border-primary/30 text-primary'
+                                    : 'bg-card border-border text-muted-foreground'
+                            }`}
+                        >
+                            {idx + 1}
+                        </button>
+                    );
+                })}
             </div>
         </div>
     );

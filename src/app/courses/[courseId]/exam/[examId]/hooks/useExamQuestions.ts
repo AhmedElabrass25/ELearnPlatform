@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { getExamQuestions } from "@/services/exams.service";
+import { Question } from "@/types";
 
 export const useExamQuestions = (examId: string, attemptState: string) => {
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

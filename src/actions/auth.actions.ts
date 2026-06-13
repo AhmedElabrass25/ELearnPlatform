@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { login, register, logout, updateMe, updatePassword } from "@/services/auth.service";
+import { login, register, logout, updateMe, updatePassword, forgotPassword, verifyResetCode, resetPassword } from "@/services/auth.service";
 import { ILoginForm } from "@/app/login/types";
 import { IRegisterForm } from "@/app/register/types";
 
@@ -130,5 +130,41 @@ export async function updatePasswordAction(data: { currentPassword: string; newP
         return { success: true };
     } catch (err: any) {
         return { success: false, error: err.message || "فشل تغيير كلمة المرور" };
+    }
+}
+
+/**
+ * Server Action: Forgot Password – sends OTP to email
+ */
+export async function forgotPasswordAction(data: { email: string }): Promise<ActionResponse> {
+    try {
+        const response = await forgotPassword(data);
+        return { success: true, data: response };
+    } catch (err: any) {
+        return { success: false, error: err.message || "فشل إرسال رمز التحقق" };
+    }
+}
+
+/**
+ * Server Action: Verify OTP reset code
+ */
+export async function verifyResetCodeAction(data: { resetCode: string }): Promise<ActionResponse> {
+    try {
+        const response = await verifyResetCode(data);
+        return { success: true, data: response };
+    } catch (err: any) {
+        return { success: false, error: err.message || "رمز التحقق غير صحيح أو منتهي" };
+    }
+}
+
+/**
+ * Server Action: Reset Password
+ */
+export async function resetPasswordAction(data: { email: string; newPassword: string; newPasswordConfirm: string }): Promise<ActionResponse> {
+    try {
+        const response = await resetPassword(data);
+        return { success: true, data: response };
+    } catch (err: any) {
+        return { success: false, error: err.message || "فشل إعادة تعيين كلمة المرور" };
     }
 }

@@ -64,12 +64,12 @@ export function ExamQuestionsModal({
     };
 
     const handleUpdated = (q: Question) => {
-        const qId = q.id || (q as any)._id;
-        setQuestions(prev => prev.map(p => (p.id || (p as any)._id) === qId ? q : p));
+        const qId = (q as any)._id || q.id;
+        setQuestions(prev => prev.map(p => ((p as any)._id || p.id) === qId ? q : p));
     };
 
     const handleDeleted = (id: string) => {
-        setQuestions(prev => prev.filter(p => (p.id || (p as any)._id) !== id));
+        setQuestions(prev => prev.filter(p => ((p as any)._id || p.id) !== id));
     };
 
     return (
@@ -139,7 +139,7 @@ export function ExamQuestionsModal({
                                 <AnimatePresence mode="popLayout">
                                     {questions.map((q, idx) => (
                                         <motion.div
-                                            key={q.id || (q as any)._id}
+                                            key={(q as any)._id || q.id}
                                             layout
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}

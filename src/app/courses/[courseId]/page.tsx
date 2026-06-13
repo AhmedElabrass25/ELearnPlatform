@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { getCourseById } from "@/services/courses.service";
 import { getCourseWeeks, getWeekContent } from "@/services/weeks.service";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
     }
   }
 
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
   return (
     <div className="min-h-screen pb-20">
       <CourseHeader course={course} />
@@ -80,6 +84,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 <CourseCurriculum
                   weeksWithLessons={weeksWithLessons}
                   courseId={courseId}
+                  token={token}
                 />
               </TabsContent>
             </Tabs>

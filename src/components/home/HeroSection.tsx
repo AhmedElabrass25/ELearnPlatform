@@ -13,7 +13,7 @@ export function HeroSection({ site, instructor }: HeroSectionProps) {
     return (
         <section className="min-h-screen relative overflow-hidden bg-background py-24 lg:py-32">
             <div className="container relative z-10 px-4 md:px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="flex items-start justify-between ">
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-right space-y-8">
                         <Badge variant="secondary" className="px-4 py-1.5 text-sm font-medium rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
                             {site.tagline}
@@ -34,14 +34,9 @@ export function HeroSection({ site, instructor }: HeroSectionProps) {
                             </Button>
                         </div>
                     </div>
-                    <div className="relative mx-auto w-full max-w-md lg:max-w-full flex items-center justify-center mt-8 lg:mt-0">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl" />
-                        <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px] rounded-full sm:rounded-[40px] overflow-hidden border-8 border-background/50 shadow-2xl">
+                    <div className="relative mx-auto w-full max-w-md lg:max-w-full flex items-center justify-end mt-8 lg:mt-0">
+                        <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[650px] lg:h-[650px] rounded-full sm:rounded-[40px] overflow-hidden border-8 border-background/50 shadow-2xl">
                             <Image src="/images/instructor.jpg" alt={instructor.name} fill className="object-cover" loading="eager" />
-                        </div>
-                        <div className="absolute bottom-10 right-0 sm:-right-4 bg-background p-4 rounded-xl shadow-xl border border-border/30 flex items-center gap-3">
-                            <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center"><Star className="w-5 h-5 text-primary fill-primary" /></div>
-                            <div><p className="font-bold text-sm">أفضل معلم</p><p className="text-xs text-muted-foreground">لتبسيط الرياضيات</p></div>
                         </div>
                     </div>
                 </div>

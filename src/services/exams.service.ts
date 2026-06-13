@@ -2,6 +2,15 @@ import { apiFetch } from "@/lib/api-client";
 import { Exam } from "@/types";
 
 /**
+ * Get all exams (Admin only)
+ */
+export async function getAllExams() {
+  const response = await apiFetch(`/api/v1/exams`);
+  return response?.data;
+}
+
+
+/**
  * Create an exam inside a week
  */
 export async function createExamInWeek(
@@ -78,6 +87,14 @@ export async function submitExamAttempt(examId: string, payload: { answers: { qu
 export async function getMyExamAttempt(examId: string) {
   const response = await apiFetch(`/api/v1/exams/${examId}/attempts/my`);
   console.log(response)
+  return response?.data;
+}
+
+/**
+ * Get all exam attempts for the current user
+ */
+export async function getMyAllAttempts() {
+  const response = await apiFetch(`/api/v1/exams/attempts/my`);
   return response?.data;
 }
 

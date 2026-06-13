@@ -48,6 +48,7 @@ export interface Question {
     score?: number;
     type?: string;
     correctAnswer?: string | boolean;
+    correctOption?: number;
 }
 
 export interface Exam {

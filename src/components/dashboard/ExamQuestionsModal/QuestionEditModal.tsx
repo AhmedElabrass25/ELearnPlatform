@@ -62,14 +62,16 @@ export function QuestionEditModal({ isOpen, onClose, examId, question, onSaved }
 
         setSaving(true);
         try {
-            const qId = question.id || (question as any)._id; // Added fallback just like Exam
-            const payload = {
+            const qId = (question as any)._id || question.id;
+            const data = {
                 questionText: questionText.trim(),
                 options: options.map(o => ({ text: o.text.trim(), isCorrect: o.isCorrect })),
                 mark
             };
-            await updateQuestion(examId, qId as string, payload);
-            onSaved({ ...question, ...payload } as Question);
+            const updatedQuestion = await updateQuestion(examId, qId as string, data);
+            
+            onSaved(updatedQuestion || { ...question, ...data } as Question);
+            
             toast.success("تم تحديث السؤال بنجاح");
             onClose();
         } catch (err: any) {

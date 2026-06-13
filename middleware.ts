@@ -10,10 +10,11 @@ export function middleware(request: NextRequest) {
   if (isAuthPage && token) {    return NextResponse.redirect(new URL('/', request.url));
   }
 
-  const isProtectedRoute = request.nextUrl.pathname.startsWith('/courses') || 
-                           request.nextUrl.pathname.startsWith('/profile') ||
-                           request.nextUrl.pathname.startsWith('/dashboard')||
-                           request.nextUrl.pathname.startsWith('/paths');
+  const isProtectedRoute = request.nextUrl.pathname.startsWith('/profile') ||
+                           request.nextUrl.pathname.startsWith('/dashboard') ||
+                           request.nextUrl.pathname.startsWith('/my-courses') ||
+                           request.nextUrl.pathname.startsWith('/lessons') ||
+                           (request.nextUrl.pathname.startsWith('/courses') && request.nextUrl.pathname.includes('/exam'));
 
   if (isProtectedRoute && !token) {
     return NextResponse.redirect(new URL('/login', request.url));
@@ -23,5 +24,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/login', '/register', '/courses/:path*', '/profile/:path*', '/dashboard/:path*','/paths/:path*'],
+  matcher: ['/login', '/register', '/courses/:path*', '/profile/:path*', '/dashboard/:path*','/paths/:path*', '/lessons/:path*', '/my-courses/:path*'],
 }
